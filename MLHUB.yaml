@@ -4,6 +4,7 @@ meta:
   title        : Azure Text Analytics cognitive services on the cloud.
   keywords     : azure, text analytics
   version      : 0.0.1
+  languages    : py
   license      : mit
   author       : Graham.Williams@togaware.com
   url          : https://github.com/gjwgit/aztext
