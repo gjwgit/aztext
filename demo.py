@@ -37,6 +37,7 @@ import sys
 import os
 import pickle
 import requests
+from textwrap import fill
 from pprint import pprint
 
 # Prompt the user for the key and region and save into private.py for
@@ -90,7 +91,7 @@ if len(subscription_key) == 0:
     with open(CANNED_PKL, 'rb') as f:
         languages, sentiments, key_phrases, entities = pickle.load(f)
     sys.stdout.write("""
-No subscription key was provided so we will continue with a local only canned
+No subscription key was provided so we will continue with a canned
 demonstration. The analyses from the cloud through the API have previously
 been captured and so we will use them.
 """)
@@ -142,33 +143,19 @@ print("")
 
 for d, l in zip(documents['documents'], languages['documents']):
     id = d['id']
-    print(d['text'])
+    print("{} {}".format(id, d['text']))
     dl = l['detectedLanguages'][0]
-    print("  This is {} ({}) with score of {}.\n".
+    print("  This is {} ({}) with score of {}.".
           format(dl['name'], dl['iso6391Name'], dl['score']))
     if id == "5":
-        sys.stdout.write("""==> That one was purposely jumbled. Note the score.
-
-Press Enter to continue with language identification: """)
-        answer = input()
-        print("")
+        print("  NOTE: the text is rather jumbled hence a lower score.")
     elif id == "8":
-        sys.stdout.write("""==> That one is a little tricky. It is actually Javanese though it is
-==> probably identified as Indonesian by most text analytics.
-
-Press Enter to continue with language identification: """)
-        answer = input()
-        print("")
+        print("  NOTE: a little tricky as it is actually Javanese.")
     elif id == "10":
-        sys.stdout.write("""==> English? Actually it is Ye Olde English.
+        print("  NOTE: yes it is actually Ye Olde English.")
+    print("")
 
-Press Enter to continue with language identification: """)
-        answer = input()
-        print("")
-
-sys.stdout.write("""==> That's the end of the language examples.
-
-Press Enter to continue: """)
+sys.stdout.write("That's the end of the language identification. Press Enter to continue: ")
 answer = input()
 
 print("""
@@ -190,7 +177,7 @@ Press Enter to continue: """)
 answer = input()
 
 documents = {'documents' : [
-  {'id': '1', 'language': 'en', 'text': 'I had a wonderful experience! The rooms were wonderful and staff helpful.'},
+  {'id': '1', 'language': 'en', 'text': 'I had a wonderful experience! The rooms were wonderful and the staff were helpful.'},
   {'id': '2', 'language': 'en', 'text': 'I had a terrible time at the hotel. The staff was rude and the food was awful.'},  
   {'id': '3', 'language': 'es', 'text': 'Los caminos que llevan hasta Monte Rainier son espectaculares y hermosos.'},  
   {'id': '4', 'language': 'es', 'text': 'La carretera estaba atascada. Había mucho tráfico el día de ayer.'}
@@ -205,11 +192,10 @@ print("")
 
 for d, s in zip(documents['documents'], sentiments['documents']):
     id = d['id']
-    print(d['text']) #WRAP THE TEXT
-    # ADD ENGLISH TRANSALTION ...
-    print("\n  This has a sentiment rating of {0:.2f}.\n".format(s['score']))
+    print("{} {}".format(id, fill(d['text'], subsequent_indent="  ")))
+    print("  This has a sentiment rating of {0:.2f}.\n".format(s['score']))
 
-sys.stdout.write("""That's the end of the sentiment examples. Press Enter to continue: """)
+sys.stdout.write("That's the end of the sentiment examples. Press Enter to continue: ")
 answer = input()
 
 print("""
@@ -246,11 +232,10 @@ print("")
 
 for d, kp in zip(documents['documents'], key_phrases['documents']):
     id = d['id']
-    print(d['text']) #WRAP THE TEXT
-    # ADD ENGLISH TRANSALTION ...
-    print("\n  The key phrases here are: {}.\n".format(kp['keyPhrases']))
+    print("{} {}".format(id, fill(d['text'], subsequent_indent="  ")))
+    print("  The key phrases here are: {}.\n".format(kp['keyPhrases']))
 
-sys.stdout.write("""That's the end of the key phrases. Press Enter to continue: """)
+sys.stdout.write("That's the end of the key phrases. Press Enter to continue: ")
 answer = input()
 
 print("""
@@ -288,17 +273,18 @@ if live:
 
 for d, es in zip(documents['documents'], entities['documents']):
     id = d['id']
-    print(d['text']) #WRAP THE TEXT
+    print('{} {}'.format(id, fill(d['text'], subsequent_indent="  ")))
     for e in es['entities']:
         print("  {}:\t{}.".format(e['name'], e['wikipediaUrl']))
     print("")
 
-sys.stdout.write("""Press Enter to finish: """)
+sys.stdout.write("Press Enter to finish: ")
 answer = input()
 
-# This is how we sve the responses for the canned demonstration.
+# This is how we save the responses for the canned demonstration.
+# If the documents above change we need a new can of pickles.
 
 if False:
     import pickle
-    with open('canned.pkl', 'wb') as f:
+    with open(CANNED_PKL, 'wb') as f:
         pickle.dump([languages, sentiments, key_phrases, entities], f)
