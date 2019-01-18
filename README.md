@@ -5,9 +5,7 @@ This [MLHub](https://mlhub.ai) package provides a quick introduction
 to the pre-built Text Analytics models provided through Azure's
 Cognitive Services. This service extracts information from text that
 we supply to it. Such information includes the language, key phrases,
-sentiment (0-1 as negative to positive sentiment), and entities
-(person, organisation, a quantity, date and time, a URL, or an email
-address).
+sentiment (0-1 as negative to positive sentiment), and entities.
 
 A free Azure subscription is available from
 https://azure.microsoft.com/free/. Once set up visit
