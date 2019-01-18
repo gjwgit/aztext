@@ -7,7 +7,7 @@ Cognitive Services. This service extracts information from text that
 we supply to it. Such information includes the language, key phrases,
 sentiment (0-1 as negative to positive sentiment), and entities
 (person, organisation, a quantity, date and time, a URL, or an email
-address), as well as translation.
+address).
 
 A free Azure subscription is available from
 https://azure.microsoft.com/free/. Once set up visit
@@ -40,4 +40,4 @@ To install and run the pre-built model:
 Further Information
 -------------------
 
-	
+For language translation see the azlang package.
