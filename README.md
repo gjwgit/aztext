@@ -34,7 +34,11 @@ To install and run the pre-built model:
     $ ml install   aztext
     $ ml configure aztext
     $ ml demo      aztext
+    $ ml score     aztext
 
+Do note that sentiments, key phrases, and entities are not available
+for all languages.
+    
 Further Information
 -------------------
 
