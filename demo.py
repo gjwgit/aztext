@@ -16,8 +16,8 @@ Azure Text Analytics
 Welcome to a demo of the pre-built models for Text Analytics provided
 through Azure's Cognitive Services. This service extracts information
 from text that we supply to it, providing information such as the
-language, key phrases, sentiment (0-1 as negative to positive
-sentiment), and entities.
+language, key phrases, sentiment (0-1 as negative to positive), and
+entities.
 """)
 
 # Defaults.
