@@ -7,7 +7,6 @@
 # https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/python
 #
 # TODO
-# * Add in text translations into English.
 # * If no key then just dummy the results!
 
 print("""====================
@@ -261,3 +260,4 @@ for d, es in zip(documents['documents'], entities['documents']):
 
 sys.stdout.write("""Press Enter to finish: """)
 answer = input()
+
