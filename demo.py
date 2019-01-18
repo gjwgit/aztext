@@ -17,14 +17,25 @@ Welcome to a demo of the pre-built models for Text Analytics provided
 through Azure's Cognitive Services. This service extracts information
 from text that we supply to it, providing information such as the
 language, key phrases, sentiment (0-1 as negative to positive
-sentiment), and entities (person, organisation, a quantity, date and
-time, a URL, or an email address).
+sentiment), and entities.
 """)
+
+# Defaults.
+
+KEY_FILE = "private.py"
+DEFAULT_REGION = "southeastasia"
+CANNED_PKL = "canned.pkl"
+
+fname = KEY_FILE
+region = DEFAULT_REGION
+subscription_key = None
+live = True
 
 # Import the required libraries.
 
 import sys
 import os
+import pickle
 import requests
 from pprint import pprint
 
@@ -34,8 +45,6 @@ from pprint import pprint
 # subscription_key = "a14d...ef24"
 # assert subscription_key
 # region = "southeastasia"
-
-fname = "private.py"
 
 if os.path.isfile(fname):
     print("""The following file has been found and is assumed to contain
@@ -50,26 +59,41 @@ demo). See the README for details of a free subscription. Then you can
 provide the key and the region information here.
 
 If you don't have a key and want to review the canned examples rather
-than work with the live examples, you can indeed continue.
+than work with the live examples, you can indeed continue simply by 
+pressing the Enter key.
 """)
-    sys.stdout.write("Please enter your Text Analytics subscription key: ")
+    sys.stdout.write("Please enter your Text Analytics subscription key []: ")
     subscription_key = input()
-    assert subscription_key
 
-    sys.stdout.write("Please enter your region (e.g., southeastasia): ")
+    sys.stdout.write("Please enter your region [southeastasia]: ")
     region = input()
+    if len(region) == 0: region = DEFAULT_REGION
 
-    ofname = open(fname, "w")
-    ofname.write("""subscription_key = "{}"
+    if len(subscription_key) > 0:
+        assert subscription_key
+        ofname = open(fname, "w")
+        ofname.write("""subscription_key = "{}"
 assert subscription_key
 region = "{}"
     """.format(subscription_key, region))
-    ofname.close()
+        ofname.close()
 
-    print("""
+        print("""
 I've saved that information into the file:
 
 """ + os.getcwd() + "/" + fname)
+
+# Handle canned demonstration.
+    
+if len(subscription_key) == 0:
+    live = False
+    with open(CANNED_PKL, 'rb') as f:
+        languages, sentiments, key_phrases, entities = pickle.load(f)
+    sys.stdout.write("""
+No subscription key was provided so we will continue with a local only canned
+demonstration. The analyses from the cloud through the API have previously
+been captured and so we will use them.
+""")
     
 sys.stdout.write("""
 Press Enter to continue: """)
@@ -85,7 +109,7 @@ Language Information
 
 We will first demonstrate the automated identification of language. Below
 are a few "documents" in different languages which are passed on to the 
-language API URL for processing in the cloud:
+cloud for processing using the following language API URL:
 """)
 
 language_api_url = text_analytics_base_url + "languages"
@@ -109,9 +133,10 @@ documents = { 'documents': [
     { 'id': '10', 'text': 'Ich canne glas eten and hit hirtiþ me nouȝt.' },
 ]}
 
-headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
-response  = requests.post(language_api_url, headers=headers, json=documents)
-languages = response.json()
+if live:
+    headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
+    response  = requests.post(language_api_url, headers=headers, json=documents)
+    languages = response.json()
 
 print("")
 
@@ -124,14 +149,20 @@ for d, l in zip(documents['documents'], languages['documents']):
     if id == "5":
         sys.stdout.write("""==> That one was purposely jumbled. Note the score.
 
-Press Enter to continue: """)
+Press Enter to continue with language identification: """)
         answer = input()
         print("")
     elif id == "8":
         sys.stdout.write("""==> That one is a little tricky. It is actually Javanese though it is
 ==> probably identified as Indonesian by most text analytics.
 
-Press Enter to continue: """)
+Press Enter to continue with language identification: """)
+        answer = input()
+        print("")
+    elif id == "10":
+        sys.stdout.write("""==> English? Actually it is Ye Olde English.
+
+Press Enter to continue with language identification: """)
         answer = input()
         print("")
 
@@ -159,15 +190,16 @@ Press Enter to continue: """)
 answer = input()
 
 documents = {'documents' : [
-  {'id': '1', 'language': 'en', 'text': 'I had a wonderful experience! The rooms were wonderful and the staff was helpful.'},
+  {'id': '1', 'language': 'en', 'text': 'I had a wonderful experience! The rooms were wonderful and staff helpful.'},
   {'id': '2', 'language': 'en', 'text': 'I had a terrible time at the hotel. The staff was rude and the food was awful.'},  
   {'id': '3', 'language': 'es', 'text': 'Los caminos que llevan hasta Monte Rainier son espectaculares y hermosos.'},  
   {'id': '4', 'language': 'es', 'text': 'La carretera estaba atascada. Había mucho tráfico el día de ayer.'}
 ]}
 
-headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
-response  = requests.post(sentiment_api_url, headers=headers, json=documents)
-sentiments = response.json()
+if live:
+    headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
+    response  = requests.post(sentiment_api_url, headers=headers, json=documents)
+    sentiments = response.json()
 
 print("")
 
@@ -199,14 +231,16 @@ Press Enter to continue: """)
 answer = input()
 
 documents = {'documents' : [
-  {'id': '1', 'language': 'en', 'text': 'I had a wonderful experience! The rooms were wonderful and the staff was helpful.'},
+  {'id': '1', 'language': 'en', 'text': 'I had a wonderful experience! The rooms were wonderful and staff helpful.'},
   {'id': '2', 'language': 'en', 'text': 'I had a terrible time at the hotel. The staff was rude and the food was awful.'},  
   {'id': '3', 'language': 'es', 'text': 'Los caminos que llevan hasta Monte Rainier son espectaculares y hermosos.'},  
   {'id': '4', 'language': 'es', 'text': 'La carretera estaba atascada. Había mucho tráfico el día de ayer.'}
 ]}
-headers   = {'Ocp-Apim-Subscription-Key': subscription_key}
-response  = requests.post(key_phrase_api_url, headers=headers, json=documents)
-key_phrases = response.json()
+
+if live:
+    headers   = {'Ocp-Apim-Subscription-Key': subscription_key}
+    response  = requests.post(key_phrase_api_url, headers=headers, json=documents)
+    key_phrases = response.json()
 
 print("")
 
@@ -225,8 +259,8 @@ Entities
 ========
 
 Our final demonstration identifies the entities refered to in the document.
-As a bonus it also links to Wikipedia for more information! As above, the
-text is passed on to the cloud through the API at the URL below.
+As a bonus the API generates a link to Wikipedia for more information! As 
+above, the text is passed on to the cloud through the API at the URL below.
 """)
 
 entity_linking_api_url = text_analytics_base_url + "entities"
@@ -247,9 +281,10 @@ documents = {'documents' : [
      'I had a wonderful trip to Singapore and enjoyed seeing the Gardens by the Bay!'}
 ]}
 
-headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
-response  = requests.post(entity_linking_api_url, headers=headers, json=documents)
-entities = response.json()
+if live:
+    headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
+    response  = requests.post(entity_linking_api_url, headers=headers, json=documents)
+    entities = response.json()
 
 for d, es in zip(documents['documents'], entities['documents']):
     id = d['id']
@@ -261,3 +296,9 @@ for d, es in zip(documents['documents'], entities['documents']):
 sys.stdout.write("""Press Enter to finish: """)
 answer = input()
 
+# This is how we sve the responses for the canned demonstration.
+
+if False:
+    import pickle
+    with open('canned.pkl', 'wb') as f:
+        pickle.dump([languages, sentiments, key_phrases, entities], f)
