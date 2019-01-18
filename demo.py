@@ -28,14 +28,14 @@ import os
 import requests
 from pprint import pprint
 
-# Prompt the user for the key and region and save into aztext.py for
+# Prompt the user for the key and region and save into private.py for
 # future runs of the model. The contents of that file is:
 #
 # subscription_key = "a14d...ef24"
 # assert subscription_key
 # region = "southeastasia"
 
-fname = "aztext.py"
+fname = "private.py"
 
 if os.path.isfile(fname):
     print("""The following file has been found and is assumed to contain
