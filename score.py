@@ -67,16 +67,6 @@ provide the key and the region information here.
 cognitive_services_url = "https://" + region + ".api.cognitive.microsoft.com"
 text_analytics_base_url = cognitive_services_url + "/text/analytics/v2.0/"
 
-# Comman function to do the actual work.
-
-def _score_for(txt):
-    """Score the supplied text (i.e., pass it to Text Analytics).
-
-    Args:
-        txt (str): a txt to be the document analysed by Text Analytics.
-    """
-
-
 prompt = "\nEnter text to be analysed (Quit by Ctrl-d):\n> "
 try:
     txt = input(prompt)
