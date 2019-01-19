@@ -69,6 +69,7 @@ text_analytics_base_url = cognitive_services_url + "/text/analytics/v2.0/"
 
 prompt = "\nEnter text to be analysed (Quit by Ctrl-d):\n> "
 try:
+    sys.stdout.write(prompt)
     txt = input(prompt)
 except EOFError:
     print()
@@ -123,6 +124,7 @@ while txt != '':
             print("  {}:\t{}.".format(e['name'], e['wikipediaUrl']))
 
     try:
+        sys.stdout.write(prompt)
         txt = input(prompt)
     except EOFError:
         print()
