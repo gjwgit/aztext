@@ -17,6 +17,6 @@ dependencies:
     - canned.pkl
     - README.md
 commands:
-  demo    : Demonstrate the functionalitry of text analytics.
+  demo    : Demonstrate the functionality of text analytics.
   analyse : Prompts for text and analyses it.
   
