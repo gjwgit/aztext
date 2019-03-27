@@ -10,7 +10,8 @@ meta:
   url          : https://github.com/gjwgit/aztext
 dependencies:
   python3: requests
-  files: https://mlhub.ai/private.py
+  files: https://mlhub.ai/empty.txt: private.py
 commands:
   demo    : Demonstrate the functionalitry of text analytics.
   analyse : Prompts for text and analyses it.
+  
