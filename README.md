@@ -7,6 +7,9 @@ Cognitive Services. This service extracts information from text that
 we supply to it. Such information includes the language, key phrases,
 sentiment (0-1 as negative to positive sentiment), and entities.
 
+Language identification supports many languages whilst key-phrases,
+sentiment, and entities are limited to a few languages.
+
 A free Azure subscription allowing up to 5,000 transactions per month
 is available from https://azure.microsoft.com/free/. Once set up visit
 https://ms.portal.azure.com and Create a resource under AI and Machine
@@ -32,7 +35,7 @@ To install and run the pre-built model:
     $ ml install   aztext
     $ ml configure aztext
     $ ml demo      aztext
-    $ ml score     aztext
+    $ ml analyse   aztext
 
 Do note that sentiments, key phrases, and entities are not available
 for all languages.
