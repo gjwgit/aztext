@@ -47,7 +47,7 @@ from pprint import pprint
 # assert subscription_key
 # region = "southeastasia"
 
-if os.path.isfile(fname):
+if os.path.isfile(fname) & os.path.getsize(fname) != 0:
     print("""The following file has been found and is assumed to contain
 an Azure Text Analytics subscription key and region. We will load 
 the file and use this information.
