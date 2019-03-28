@@ -29,18 +29,17 @@ Start](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/
 Usage
 -----
 
-To install and run the pre-built model:
+- To install mlhub 
 
-    $ pip3 install mlhub
-    $ ml install   aztext
-    $ ml configure aztext
-    $ ml demo      aztext
-    $ ml analyse   aztext
+        $ pip3 install mlhub
+
+- To install and run the pre-built model:
+
+		$ ml install   aztext
+		$ ml configure aztext
+		$ ml demo      aztext
+		$ ml analyse   aztext
 
 Do note that sentiments, key phrases, and entities are not available
 for all languages.
     
-Further Information
--------------------
-
-For language translation see the azlang package.
