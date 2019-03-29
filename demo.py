@@ -47,7 +47,7 @@ from pprint import pprint
 # assert subscription_key
 # region = "southeastasia"
 
-if os.path.isfile(fname) & os.path.getsize(fname) != 0:
+if os.path.isfile(fname) and os.path.getsize(fname) != 0:
     print("""The following file has been found and is assumed to contain
 an Azure Text Analytics subscription key and region. We will load 
 the file and use this information.
@@ -164,7 +164,7 @@ Sentiment Analysis
 ==================
 
 Now we look at an analysis of the sentiment of the document/text. This is
-done so by passing the text of the document on to the sentiment API URL
+done so by passing the text of the text on to the sentiment API URL
 shown below for processing in the cloud. The results are returned as a number
 between 0 and 1 with 0 being the most negative and 1 being the most positive.
 """)
@@ -203,9 +203,9 @@ print("""
 Key Phrases
 ===========
 
-We are often interested, for further analysis, in the key phrases of a 
-document. Here we extract what are considered to be the key phrases of
-the document. Again, the text is passed on to the cloud through the API
+We are often interested, for further analysis, in the key phrases found in
+the text. Here we extract what are considered to be the key phrases from 
+the text. Again, the text is passed on to the cloud through the API
 at the URL below.
 """)
 
@@ -243,7 +243,7 @@ print("""
 Entities
 ========
 
-Our final demonstration identifies the entities refered to in the document.
+Our final demonstration identifies the entities refered to in the text.
 As a bonus the API generates a link to Wikipedia for more information! As 
 above, the text is passed on to the cloud through the API at the URL below.
 """)
