@@ -275,7 +275,7 @@ for d, es in zip(documents['documents'], entities['documents']):
     id = d['id']
     print('{} {}'.format(id, fill(d['text'], subsequent_indent="  ")))
     for e in es['entities']:
-        print("  {}:\t{}.".format(e['name'], e['wikipediaUrl']))
+        print("  {}: {}.".format(e['name'], e['wikipediaUrl']))
     print("")
 
 sys.stdout.write("Press Enter to finish: ")
