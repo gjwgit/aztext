@@ -10,6 +10,10 @@ sentiment (0-1 as negative to positive sentiment), and entities.
 Language identification supports many languages whilst key-phrases,
 sentiment, and entities are limited to a few languages.
 
+Text analytics is used in many scenarios, including the analysis of
+customer calls into a call centre, the analysis of survey results,
+monitoring social media commentary on a subject, etc.
+
 A free Azure subscription allowing up to 5,000 transactions per month
 is available from https://azure.microsoft.com/free/. Once set up visit
 https://ms.portal.azure.com and Create a resource under AI and Machine
