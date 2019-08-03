@@ -55,8 +55,7 @@ available for all languages.
 **analyze**
 
 ```console
-$ ml analyze aztext "I had a wonderful experience! The rooms were wonderful and staff
-  helpful."
+$ ml analyze aztext "I had a wonderful experience! The rooms were wonderful and staff helpful."
 1.0,english,0.97,positive,wonderful experience:rooms:staff helpful,
 ```
 
