@@ -38,7 +38,7 @@ option_parser = argparse.ArgumentParser(add_help=False)
 
 option_parser.add_argument(
     'sentence',
-    nargs="?",
+    nargs="*",
     help='sentence to analyse')
 
 args = option_parser.parse_args()
@@ -126,10 +126,9 @@ def analyseText(txt):
             print(f"{sep}{e['name']}", end="") # e['wikipediaUrl']
             sep=":"
 
+txt = " ".join(args.sentence)
 
-txt = args.sentence
-
-if txt is None:
+if txt == "":
 
     prompt = "Enter text to be analysed\nQuit with Ctrl-d, Output conf,lang,sentiment,phrases,entities):\n> "
 
