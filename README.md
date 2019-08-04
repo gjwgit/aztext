@@ -54,21 +54,16 @@ available for all languages.
 
 **analyze**
 
-The *analyze* 
+The *analyze* command takes a single sentence and returns the text
+analysis of the sentence, beginning with the confidence of the
+identified, the language, the level of positive sentiment, the key
+phrases separated by colons, and the identified entities, separated by
+colons.
 
 ```console
 $ ml analyze aztext "I had a wonderful experience! The rooms were wonderful and staff helpful."
 1.0,en,0.96,wonderful experience:rooms:staff helpful,
 ```
-
-**language**
-
-**senitment**
-
-**phrases**
-
-**entities**
-
 # Demonstration
 
 ```console
