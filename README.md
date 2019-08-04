@@ -54,9 +54,11 @@ available for all languages.
 
 **analyze**
 
+The *analyze* 
+
 ```console
 $ ml analyze aztext "I had a wonderful experience! The rooms were wonderful and staff helpful."
-1.0,en,0.97,wonderful experience:rooms:staff helpful,
+1.0,en,0.96,wonderful experience:rooms:staff helpful,
 ```
 
 **language**
