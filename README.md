@@ -49,9 +49,6 @@ $ ml configure aztext
 
 ## Command Line Tools
 
-TODO. Do note that sentiments, key phrases, and entities are not
-available for all languages.
-
 **analyze**
 
 The *analyze* command takes a single sentence and returns the text
@@ -79,6 +76,10 @@ $ ml analyze aztext Los caminos que llevan hasta Monte Rainier son espectaculare
 $ ml analyze aztext La carretera estaba atascada. Había mucho tráfico el día de ayer.
 1.0,es,0.33,carretera:tráfico:día,
 ```
+
+Note that sentiments, key phrases, and entities are not
+available for all languages.
+
 Without an argument the command will enter an interactive loop,
 prompting for a sentence, and analyzing that sentence.
 
