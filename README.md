@@ -75,6 +75,9 @@ $ ml analyze aztext Los caminos que llevan hasta Monte Rainier son espectaculare
 
 $ ml analyze aztext La carretera estaba atascada. Había mucho tráfico el día de ayer.
 1.0,es,0.33,carretera:tráfico:día,
+
+$ ml analyze aztext मैं काँच खा सकता हूँ और मुझे उससे कोई चोट नहीं पहुंचती.
+1.0,hi,,,
 ```
 
 Note that sentiments, key phrases, and entities are not
