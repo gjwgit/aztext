@@ -28,8 +28,12 @@ CANNED_PKL = "canned.pkl"
 
 fname = KEY_FILE
 region = DEFAULT_REGION
-subscription_key = None
+key = None
 live = True
+
+# ----------------------------------------------------------------------
+# Setup
+# ----------------------------------------------------------------------
 
 # Import the required libraries.
 
@@ -37,56 +41,26 @@ import sys
 import os
 import pickle
 import requests
+
 from textwrap import fill
 from pprint import pprint
 
-# Prompt the user for the key and region and save into private.py for
-# future runs of the model. The contents of that file is:
-#
-# subscription_key = "a14d...ef24"
-# assert subscription_key
-# region = "southeastasia"
+from mlhub.pkg import azkey
 
-if os.path.isfile(fname) and os.path.getsize(fname) != 0:
-    print("""The following file has been found and is assumed to contain
-an Azure Text Analytics subscription key and region. We will load 
-the file and use this information.
+# Defaults.
 
-""" + os.getcwd() + "/" + fname)
-    exec(open(fname).read())
-else:
-    print("""An Azure resource is required to access this service (and to run this
-demo). See the README for details of a free subscription. Then you can
-provide the key and the region information here.
+SERVICE = "Text Analytics"
+KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
 
-If you don't have a key and want to review the canned examples rather
-than work with the live examples, you can indeed continue simply by 
-pressing the Enter key.
-""")
-    sys.stdout.write("Please enter your Text Analytics subscription key []: ")
-    subscription_key = input()
+# ----------------------------------------------------------------------
+# Request subscription key and endpoint from user.
+# ----------------------------------------------------------------------
 
-    sys.stdout.write("Please enter your region [southeastasia]: ")
-    region = input()
-    if len(region) == 0: region = DEFAULT_REGION
-
-    if len(subscription_key) > 0:
-        assert subscription_key
-        ofname = open(fname, "w")
-        ofname.write("""subscription_key = "{}"
-assert subscription_key
-region = "{}"
-    """.format(subscription_key, region))
-        ofname.close()
-
-        print("""
-I've saved that information into the file:
-
-""" + os.getcwd() + "/" + fname)
+key, endpoint = azkey(KEY_FILE, SERVICE, verbose=False)
 
 # Handle canned demonstration.
     
-if len(subscription_key) == 0:
+if len(key) == 0:
     live = False
     with open(CANNED_PKL, 'rb') as f:
         languages, sentiments, key_phrases, entities = pickle.load(f)
@@ -100,9 +74,6 @@ sys.stdout.write("""
 Press Enter to continue: """)
 answer = input()
 
-cognitive_services_url = "https://" + region + ".api.cognitive.microsoft.com"
-text_analytics_base_url = cognitive_services_url + "/text/analytics/v2.0/"
-
 print("""
 ====================
 Language Information
@@ -113,7 +84,7 @@ are a few "documents" in different languages which are passed on to the
 cloud for processing using the following language API URL:
 """)
 
-language_api_url = text_analytics_base_url + "languages"
+language_api_url = endpoint + "languages"
 print(language_api_url + "\n")
 
 # 6 to 10 come from http://www.columbia.edu/~fdc/utf8/index.html
@@ -135,7 +106,7 @@ documents = { 'documents': [
 ]}
 
 if live:
-    headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
+    headers   = {"Ocp-Apim-Subscription-Key": key}
     response  = requests.post(language_api_url, headers=headers, json=documents)
     languages = response.json()
 
@@ -169,7 +140,7 @@ shown below for processing in the cloud. The results are returned as a number
 between 0 and 1 with 0 being the most negative and 1 being the most positive.
 """)
 
-sentiment_api_url = text_analytics_base_url + "sentiment"
+sentiment_api_url = endpoint + "sentiment"
 print(sentiment_api_url)
 
 sys.stdout.write("""
@@ -184,7 +155,7 @@ documents = {'documents' : [
 ]}
 
 if live:
-    headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
+    headers   = {"Ocp-Apim-Subscription-Key": key}
     response  = requests.post(sentiment_api_url, headers=headers, json=documents)
     sentiments = response.json()
 
@@ -209,7 +180,7 @@ the text. Again, the text is passed on to the cloud through the API
 at the URL below.
 """)
 
-key_phrase_api_url = text_analytics_base_url + "keyPhrases"
+key_phrase_api_url = endpoint + "keyPhrases"
 print(key_phrase_api_url)
 
 sys.stdout.write("""
@@ -224,7 +195,7 @@ documents = {'documents' : [
 ]}
 
 if live:
-    headers   = {'Ocp-Apim-Subscription-Key': subscription_key}
+    headers   = {'Ocp-Apim-Subscription-Key': key}
     response  = requests.post(key_phrase_api_url, headers=headers, json=documents)
     key_phrases = response.json()
 
@@ -248,7 +219,7 @@ As a bonus the API generates a link to Wikipedia for more information! As
 above, the text is passed on to the cloud through the API at the URL below.
 """)
 
-entity_linking_api_url = text_analytics_base_url + "entities"
+entity_linking_api_url = endpoint + "entities"
 print(entity_linking_api_url)
 
 sys.stdout.write("""
@@ -267,7 +238,7 @@ documents = {'documents' : [
 ]}
 
 if live:
-    headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
+    headers   = {"Ocp-Apim-Subscription-Key": key}
     response  = requests.post(entity_linking_api_url, headers=headers, json=documents)
     entities = response.json()
 
