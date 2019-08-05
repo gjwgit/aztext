@@ -1,19 +1,21 @@
+# -*- coding: utf-8 -*-
+
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
-# Author: Graham.Williams@togaware.com
+# Author: Graham.Williams@microsoft.com
 #
 # This demo is based on the Azure Cognitive Services Text Analytics Quick Starts
 # 
 # https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/python
-#
-# TODO
-# * If no key then just dummy the results!
-# * Move to using the python SDK!!
+# https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/python-sdk
 
-print("""====================
-Azure Text Analytics
-====================
+##################### FIRST: MOVE ALL TO MLHUB UTILS!!!!
 
+##################### THEN: MOVE ALL TO USING PYTHON SDK!!!!!!
+
+from mlhub.pkg import azkey, mlask, mlcat
+
+mlcat("Azure Text Analytics", """\
 Welcome to a demo of the pre-built models for Text Analytics provided
 through Azure's Cognitive Services. This service extracts information
 from text that we supply to it, providing information such as the
@@ -35,15 +37,12 @@ import requests
 from textwrap import fill
 from pprint import pprint
 
-from mlhub.pkg import azkey
+# pip3 install --upgrade --user azure-cognitiveservices-language-textanalytics
 
 #from azure.cognitiveservices.language.textanalytics import TextAnalyticsClient
 #from msrest.authentication import CognitiveServicesCredentials
 
-# Defaults.
-
-SERVICE = "Text Analytics"
-KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
+# Constants.
 
 CANNED_PKL = "canned.pkl"
 live = True
@@ -52,7 +51,11 @@ live = True
 # Request subscription key and endpoint from user.
 # ----------------------------------------------------------------------
 
-key, endpoint = azkey(KEY_FILE, SERVICE, verbose=False)
+SERVICE = "Text Analytics"
+KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
+
+key, endpoint = azkey(KEY_FILE, SERVICE, verbose=False)#, basename=True)
+######################## ADD BASENAME RETURNS THE BASE URL NOT FULL PATH
 
 # Ensure endpoint ends in /
 
@@ -70,15 +73,9 @@ demonstration. The analyses from the cloud through the API have previously
 been captured and so we will use them.
 """)
     
-sys.stdout.write("""
-Press Enter to continue: """)
-answer = input()
+mlask(end="\n")
 
-print("""
-====================
-Language Information
-====================
-
+mlcat("Language Information", """\
 We will first demonstrate the automated identification of language. Below
 are a few "documents" in different languages which are passed on to the 
 cloud for processing using the following language API URL:
@@ -89,8 +86,7 @@ print(language_api_url + "\n")
 
 # 6 to 10 come from http://www.columbia.edu/~fdc/utf8/index.html
 
-sys.stdout.write("""Press Enter to continue: """)
-answer = input()
+mlask()
 
 documents = { 'documents': [
     { 'id': '1', 'text': 'This line is some text as a sample document written in English.' },
@@ -126,14 +122,9 @@ for d, l in zip(documents['documents'], languages['documents']):
         print("  NOTE: yes it is actually Ye Olde English.")
     print("")
 
-sys.stdout.write("That's the end of the language identification. Press Enter to continue: ")
-answer = input()
+mlask(end="\n")
 
-print("""
-==================
-Sentiment Analysis
-==================
-
+mlcat("Sentiment Analysis", """\
 Now we look at an analysis of the sentiment of the document/text. This is
 done so by passing the text of the text on to the sentiment API URL
 shown below for processing in the cloud. The results are returned as a number
@@ -143,9 +134,7 @@ between 0 and 1 with 0 being the most negative and 1 being the most positive.
 sentiment_api_url = endpoint + "sentiment"
 print(sentiment_api_url)
 
-sys.stdout.write("""
-Press Enter to continue: """)
-answer = input()
+mlask(begin="\n")
 
 documents = {'documents' : [
   {'id': '1', 'language': 'en', 'text': 'I had a wonderful experience! The rooms were wonderful and the staff were helpful.'},
@@ -166,14 +155,9 @@ for d, s in zip(documents['documents'], sentiments['documents']):
     print("{} {}".format(id, fill(d['text'], subsequent_indent="  ")))
     print("  This has a sentiment rating of {0:.2f}.\n".format(s['score']))
 
-sys.stdout.write("That's the end of the sentiment examples. Press Enter to continue: ")
-answer = input()
+mlask(end="\n")
 
-print("""
-===========
-Key Phrases
-===========
-
+mlcat("Key Phrases", """\
 We are often interested, for further analysis, in the key phrases found in
 the text. Here we extract what are considered to be the key phrases from 
 the text. Again, the text is passed on to the cloud through the API
@@ -183,9 +167,7 @@ at the URL below.
 key_phrase_api_url = endpoint + "keyPhrases"
 print(key_phrase_api_url)
 
-sys.stdout.write("""
-Press Enter to continue: """)
-answer = input()
+mlask(begin="\n")
 
 documents = {'documents' : [
   {'id': '1', 'language': 'en', 'text': 'I had a wonderful experience! The rooms were wonderful and staff helpful.'},
@@ -206,14 +188,9 @@ for d, kp in zip(documents['documents'], key_phrases['documents']):
     print("{} {}".format(id, fill(d['text'], subsequent_indent="  ")))
     print("  The key phrases here are: {}.\n".format(kp['keyPhrases']))
 
-sys.stdout.write("That's the end of the key phrases. Press Enter to continue: ")
-answer = input()
+mlask(end="\n")
 
-print("""
-========
-Entities
-========
-
+mlcat("Entities", """\
 Our final demonstration identifies the entities refered to in the text.
 As a bonus the API generates a link to Wikipedia for more information! As 
 above, the text is passed on to the cloud through the API at the URL below.
@@ -222,11 +199,7 @@ above, the text is passed on to the cloud through the API at the URL below.
 entity_linking_api_url = endpoint + "entities"
 print(entity_linking_api_url)
 
-sys.stdout.write("""
-Press Enter to continue: """)
-answer = input()
-
-print("")
+mlask(begin="\n", end="\n")
 
 documents = {'documents' : [
     {'id': '1', 'text':
@@ -249,8 +222,7 @@ for d, es in zip(documents['documents'], entities['documents']):
         print("  {}: {}.".format(e['name'], e['type']))
     print("")
 
-sys.stdout.write("Press Enter to finish: ")
-answer = input()
+mlask(end="\n")
 
 # This is how we save the responses for the canned demonstration.
 # If the documents above change we need a new can of pickles.
