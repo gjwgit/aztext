@@ -10,6 +10,7 @@ meta:
   url          : https://github.com/azure/aztext
 dependencies:
   python3: requests
+  pip3: azure-cognitiveservices-language-textanalytics
   files:
     - https://mlhub.ai/empty.txt: private.txt
     - demo.py
