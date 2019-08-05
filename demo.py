@@ -8,6 +8,7 @@
 #
 # TODO
 # * If no key then just dummy the results!
+# * Move to using the python SDK!!
 
 print("""====================
 Azure Text Analytics
@@ -19,17 +20,6 @@ from text that we supply to it, providing information such as the
 language, key phrases, sentiment (0-1 as negative to positive), and
 entities.
 """)
-
-# Defaults.
-
-KEY_FILE = "private.py"
-DEFAULT_REGION = "southeastasia"
-CANNED_PKL = "canned.pkl"
-
-fname = KEY_FILE
-region = DEFAULT_REGION
-key = None
-live = True
 
 # ----------------------------------------------------------------------
 # Setup
@@ -47,16 +37,26 @@ from pprint import pprint
 
 from mlhub.pkg import azkey
 
+#from azure.cognitiveservices.language.textanalytics import TextAnalyticsClient
+#from msrest.authentication import CognitiveServicesCredentials
+
 # Defaults.
 
 SERVICE = "Text Analytics"
 KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
+
+CANNED_PKL = "canned.pkl"
+live = True
 
 # ----------------------------------------------------------------------
 # Request subscription key and endpoint from user.
 # ----------------------------------------------------------------------
 
 key, endpoint = azkey(KEY_FILE, SERVICE, verbose=False)
+
+# Ensure endpoint ends in /
+
+if endpoint[len(endpoint)-1] != "/": endpoint = endpoint + "/"
 
 # Handle canned demonstration.
     
@@ -238,15 +238,15 @@ documents = {'documents' : [
 ]}
 
 if live:
-    headers   = {"Ocp-Apim-Subscription-Key": key}
-    response  = requests.post(entity_linking_api_url, headers=headers, json=documents)
+    headers  = {"Ocp-Apim-Subscription-Key": key}
+    response = requests.post(entity_linking_api_url, headers=headers, json=documents)
     entities = response.json()
 
 for d, es in zip(documents['documents'], entities['documents']):
     id = d['id']
     print('{} {}'.format(id, fill(d['text'], subsequent_indent="  ")))
     for e in es['entities']:
-        print("  {}: {}.".format(e['name'], e['wikipediaUrl']))
+        print("  {}: {}.".format(e['name'], e['type']))
     print("")
 
 sys.stdout.write("Press Enter to finish: ")
