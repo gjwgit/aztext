@@ -92,7 +92,7 @@ def analyseText(txt):
     for es in response.documents:
         sep = ""
         for e in es.entities:
-            print(f"{sep}{e.name}", end="") # e['wikipediaUrl']
+            print(f"{sep}{e.type}={e.name}", end="") # e['wikipediaUrl']
             sep=":"
 
 # ------------------------------------------------------------------------
