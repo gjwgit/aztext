@@ -15,6 +15,10 @@ dependencies:
     - https://mlhub.ai/empty.txt: private.txt
     - demo.py
     - analyze.py
+    - language.py
+    - sentiment.py
+    - phrases.py
+    - entities.py
     - canned.pkl
     - README.md
 commands:
