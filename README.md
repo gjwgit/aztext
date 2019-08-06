@@ -49,6 +49,11 @@ $ ml configure aztext
 
 ## Command Line Tools
 
+This package supports the following command line tools: analyze,
+language, sentiment, phrases, entities. The *analyze* commands
+performs a basic analysis across the four capabilities with the other
+commands dealing with each of the four capabilities.
+
 **analyze**
 
 The *analyze* command takes a single sentence and returns the text
@@ -86,12 +91,47 @@ available for all languages.
 Without an argument the command will enter an interactive loop,
 prompting for a sentence, and analyzing that sentence.
 
-# Demonstration
+**entities**
+
+The *entities* command identifies the entities from the text together
+with other information, including the type of entity and a Wikipedia
+link. For each entity identified the output consists of a single line
+reporting the entity name, the type of entity and sub-type, the
+confidence of the type of entity, the offset to the entity in the
+original text, then text length of the entity, the Wikipedia
+confidence, language, entity name, and URL.
 
 ```console
-$ ml demo aztext
-====================
-Azure Text Analytics
+$ ml entities aztext I had a wonderful trip to Seattle last week and even visited the Space Needle 2 times!
+Seattle,Location,,0.82,26,7,0.24,en,Seattle,https://en.wikipedia.org/wiki/Seattle
+last week,DateTime,DateRange,0.80,34,9,,,,
+Space Needle,Location,,0.80,65,12,0.39,en,Space Needle,https://en.wikipedia.org/wiki/Space_Needle
+Space Needle,Organization,,0.94,65,12,,,,
+2,Quantity,Number,0.80,78,1,,,,
+```
+As part of a command line we could count the number of unique entities
+in the text:
+```console
+$ ml entities aztext I had a wonderful trip to Seattle last week and even visited the Space Needle 2 times! |
+  cut -d, -f1 |
+  sort -u |
+  wc -l
+4
+```
+
+How many unique locations are identified in the text:
+```console
+$ ml entities I had a wonderful trip to Seattle last week and even visited the Space Needle 2 times! |
+  awk -F, '$2=="Location"{print}' |
+  cut -d, -f1 |
+  sort -u |
+  wc -l
+2
+```
+
+# Demonstration
+
+```console $ ml demo aztext ==================== Azure Text Analytics
 ====================
 
 Welcome to a demo of the pre-built models for Text Analytics provided
