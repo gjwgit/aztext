@@ -65,9 +65,8 @@ def analyseText(txt):
 
     l    = response.documents[0]
     dl   = l.detected_languages[0]
-    lang = dl.iso6391_name
 
-    print(f"{dl.score},{lang},{dl.name}", end="")
+    print(f"{dl.score},{dl.iso6391_name},{dl.name}", end="")
 
 # ------------------------------------------------------------------------
 # Obtain text and analyze.
