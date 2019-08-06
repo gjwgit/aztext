@@ -28,11 +28,8 @@ entities.
 
 import sys
 import os
-import pickle
-#import requests
 
 from textwrap import fill
-from pprint import pprint
 
 # pip3 install --upgrade --user azure-cognitiveservices-language-textanalytics
 
