@@ -69,12 +69,21 @@ def analyseText(txt):
 
     documents = [{ 'id': '1', 'language': lang, 'text': txt }]
     response  = client.entities(documents=documents)
-
     for es in response.documents:
-        sep = ""
         for e in es.entities:
-            print(f"{sep}{e.type}={e.name}", end="") # e['wikipediaUrl']
-            sep=","
+            m = e.matches[0]
+            print(f"{e.name},", end="")
+            print(f"{e.type},", end="")
+            if e.sub_type == None:
+                print(",", end="")
+            else:
+                print(f"{e.sub_type},", end="")
+            print(f"{m.entity_type_score:0.2f},", end="")
+            print(f"{m.offset},{m.length},", end="")
+            if m.wikipedia_score == None:
+                print(",,,")
+            else:
+                print(f"{m.wikipedia_score:0.2f},{e.wikipedia_language},{e.wikipedia_id},{e.wikipedia_url}")
 
 # ------------------------------------------------------------------------
 # Obtain text and analyze.
@@ -104,4 +113,3 @@ if txt == "":
             sys.exit(0)
 else:
     analyseText(txt)
-    print()
