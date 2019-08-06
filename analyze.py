@@ -8,7 +8,8 @@
 #
 # ml analyze aztext <sentence>
 # 
-# https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/python
+# https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/
+#   quickstarts/python-sdk
 #
 
 # ----------------------------------------------------------------------
@@ -19,14 +20,14 @@
 
 import sys
 import os
-import pickle
-import requests
 import argparse
 
-from textwrap import fill
-from pprint import pprint
-
 from mlhub.pkg import azkey
+
+# pip3 install --upgrade --user azure-cognitiveservices-language-textanalytics
+
+from azure.cognitiveservices.language.textanalytics import TextAnalyticsClient
+from msrest.authentication import CognitiveServicesCredentials
 
 # Defaults.
 
@@ -50,57 +51,53 @@ args = option_parser.parse_args()
 # Request subscription key and endpoint from user.
 # ----------------------------------------------------------------------
 
-key, endpoint = azkey(KEY_FILE, SERVICE, verbose=False)
+key, endpoint = azkey(KEY_FILE, SERVICE, verbose=False, baseurl=True)
+credentials   = CognitiveServicesCredentials(key)
+client        = TextAnalyticsClient(endpoint=endpoint, credentials=credentials)
+
+# ------------------------------------------------------------------------
+# Helper function
+# ------------------------------------------------------------------------
 
 def analyseText(txt):
-    documents = { 'documents': [{ 'id': '1', 'text': txt }]}
-    url       = endpoint + "languages"
-    headers   = {"Ocp-Apim-Subscription-Key": key}
-    response  = requests.post(url, headers=headers, json=documents)
-    languages = response.json()
+    documents = [{ 'id': '1', 'text': txt }]
+    response  = client.detect_language(documents=documents)
 
-    l    = languages['documents'][0]
-    dl   = l['detectedLanguages'][0]
-    lang = dl['iso6391Name']
+    l    = response.documents[0]
+    dl   = l.detected_languages[0]
+    lang = dl.iso6391_name
 
-    print(f"{dl['score']},{lang},", end="")
+    print(f"{dl.score},{lang},", end="")
 
-    documents  = { 'documents': [{ 'id': '1', 'language': lang, 'text': txt }]}
-    url        = endpoint + "sentiment"
-    headers    = {"Ocp-Apim-Subscription-Key": key}
-    response   = requests.post(url, headers=headers, json=documents)
-    sentiments = response.json()
+    documents = [{ 'id': '1', 'language': lang, 'text': txt }]
+    response  = client.sentiment(documents=documents)
 
     sep = ""
-    for s in sentiments['documents']:
-        print(f"{sep}{s['score']:0.2f}", end="")
+    for s in response.documents:
+        print(f"{sep}{s.score:0.2f}", end="")
         sep=":"
     print(",", end="")
 
-    url         = endpoint + "keyPhrases"
-    headers     = {'Ocp-Apim-Subscription-Key': key}
-    response    = requests.post(url, headers=headers, json=documents)
-    key_phrases = response.json()
+    response = client.key_phrases(documents=documents)
 
     sep = ""
-    for kp in key_phrases['documents']:
-        for p in kp['keyPhrases']:
+    for kp in response.documents:
+        for p in kp.key_phrases:
             print(f"{sep}{p}", end="")
             sep = ":"
     print(",", end="")
     
-    url      = endpoint + "entities"
-    headers  = {"Ocp-Apim-Subscription-Key": key}
-    response = requests.post(url, headers=headers, json=documents)
-    entities = response.json()
+    response = client.entities(documents=documents)
 
-    for es in entities['documents']:
+    for es in response.documents:
         sep = ""
-        for e in es['entities']:
-            print(f"{sep}{e['name']}", end="") # e['wikipediaUrl']
+        for e in es.entities:
+            print(f"{sep}{e.name}", end="") # e['wikipediaUrl']
             sep=":"
 
+# ------------------------------------------------------------------------
 # Obtain text and analyze.
+# ------------------------------------------------------------------------
 
 txt = " ".join(args.sentence)
 
