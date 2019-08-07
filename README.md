@@ -121,7 +121,7 @@ $ ml entities aztext I had a wonderful trip to Seattle last week and even visite
 
 How many unique locations are identified in the text:
 ```console
-$ ml entities I had a wonderful trip to Seattle last week and even visited the Space Needle 2 times! |
+$ ml entities aztext I had a wonderful trip to Seattle last week and even visited the Space Needle 2 times! |
   awk -F, '$2=="Location"{print}' |
   cut -d, -f1 |
   sort -u |
