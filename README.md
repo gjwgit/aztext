@@ -186,7 +186,11 @@ target="_blank">Protocol</a>), is assigned to the computer.
 
 # Demonstration
 
-```console $ ml demo aztext ==================== Azure Text Analytics
+```console
+$ ml demo aztext 
+
+==================== 
+Azure Text Analytics
 ====================
 
 Welcome to a demo of the pre-built models for Text Analytics provided
