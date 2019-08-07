@@ -163,24 +163,25 @@ END
 This will generate HTML marked up text that will be rendered as:
 
 <ul>
-<a href="https://en.wikipedia.org/wiki/Internet">The Internet</a>
-(interconnected networks) is the backbone of all communications and
-most services used today. <a
-href="https://en.wikipedia.org/wiki/Home_directory">Home</a>, local
-and international networks provide access to resources beyond the
-local desktop computer, laptop, smartphone, or thing (as in the
-internet of things). Most computers (including smartphones) connect
-either through <a
-href="https://en.wikipedia.org/wiki/Ethernet">Ethernet</a> (named in
-recognition of the nebulous aether world out there) whereby the
-connection is by wire, or through <a
-href="https://en.wikipedia.org/wiki/Wi-Fi">WiFi</a> (as in <a
-href="https://en.wikipedia.org/wiki/High_fidelity">HiFi</a> but for
-computers) to connect wirelessly. On connecting to the Internet a
-unique address, called the <a
-href="https://en.wikipedia.org/wiki/IP_address">IP address</a>
-(Internet <a href="https://en.wikipedia.org/wiki/Communication_protoco
-l">Protocol</a>), is assigned to the computer.
+<a href="https://en.wikipedia.org/wiki/Internet" target="_blank">The
+Internet</a> (interconnected networks) is the backbone of all
+communications and most services used today. <a
+href="https://en.wikipedia.org/wiki/Home_directory"
+target="_blank">Home</a>, local and international networks provide
+access to resources beyond the local desktop computer, laptop,
+smartphone, or thing (as in the internet of things). Most computers
+(including smartphones) connect either through <a
+href="https://en.wikipedia.org/wiki/Ethernet"
+target="_blank">Ethernet</a> (named in recognition of the nebulous
+aether world out there) whereby the connection is by wire, or through
+<a href="https://en.wikipedia.org/wiki/Wi-Fi" target="_blank">WiFi</a>
+(as in <a href="https://en.wikipedia.org/wiki/High_fidelity"
+target="_blank">HiFi</a> but for computers) to connect wirelessly. On
+connecting to the Internet a unique address, called the <a
+href="https://en.wikipedia.org/wiki/IP_address" target="_blank">IP
+address</a> (Internet <a
+href="https://en.wikipedia.org/wiki/Communication_protocol"
+target="_blank">Protocol</a>), is assigned to the computer.
 </ul>
 
 # Demonstration
