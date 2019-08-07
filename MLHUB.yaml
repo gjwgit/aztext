@@ -19,6 +19,7 @@ dependencies:
     - sentiment.py
     - phrases.py
     - entities.py
+    - links.py
     - canned.pkl
     - README.md
 commands:
@@ -28,3 +29,4 @@ commands:
   sentiment : Perform a snetiment anlaysis on the text.
   phrases   : Identify the key phrases.
   entities  : Identify the entities mentioned in the text.
+  links     : Add Wikipedia links to the text.
