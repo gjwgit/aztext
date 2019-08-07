@@ -34,7 +34,7 @@ Start](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/
 
 ## Usage
 
-- To install mlhub (Ubuntu 18.03 LTS)
+- To install mlhub (Ubuntu 18.04 LTS)
 
 ```console
 $ pip3 install mlhub
