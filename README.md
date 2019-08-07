@@ -148,7 +148,6 @@ you want to have links to Wikipedia.
 
 ```console
 $ python3 links.py <<END
-
 The Internet (interconnected networks) is the
 backbone of all communications and most services used today. Home,
 local and international networks provide access to resources beyond
@@ -161,6 +160,9 @@ the Internet a unique address, called the IP address (Internet
 Protocol), is assigned to the computer.
 END
 ```
+This will generate HTML marked up text that will be rendered as:
+
+<ul>
 <a href="https://en.wikipedia.org/wiki/Internet">The Internet</a>
 (interconnected networks) is the backbone of all communications and
 most services used today. <a
@@ -179,6 +181,7 @@ unique address, called the <a
 href="https://en.wikipedia.org/wiki/IP_address">IP address</a>
 (Internet <a href="https://en.wikipedia.org/wiki/Communication_protoco
 l">Protocol</a>), is assigned to the computer.
+</ul>
 
 # Demonstration
 
