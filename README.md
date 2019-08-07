@@ -54,7 +54,7 @@ language, sentiment, phrases, entities. The *analyze* commands
 performs a basic analysis across the four capabilities with the other
 commands dealing with each of the four capabilities.
 
-**analyze**
+**Text Analysis**
 
 The *analyze* command takes a single sentence and returns the text
 analysis of the sentence, beginning with the confidence of the
@@ -91,7 +91,7 @@ available for all languages.
 Without an argument the command will enter an interactive loop,
 prompting for a sentence, and analyzing that sentence.
 
-**entities**
+**Named Entity Recognition**
 
 The *entities* command identifies the entities from the text together
 with other information, including the type of entity and a Wikipedia
@@ -128,6 +128,57 @@ $ ml entities I had a wonderful trip to Seattle last week and even visited the S
   wc -l
 2
 ```
+
+**Key Phrase Extraction**
+
+The *phrase* command extracts the key phrases from the supplied text.
+
+
+**Text Sentiment Analysis**
+
+The *sentiment* command determines how positive the text is on a scale
+from 0 (negative) through 0.5 (neutral) to 1 (positive).
+
+**Linked Entities Markup**
+
+The *links* command will return the text as is but with entities that
+have Wikipedia pages marked up with HTML to link to the appropriate
+page. This is particularly useful in writing web pages within which
+you want to have links to Wikipedia.
+
+```console
+$ python3 links.py <<END
+
+The Internet (interconnected networks) is the
+backbone of all communications and most services used today. Home,
+local and international networks provide access to resources beyond
+the local desktop computer, laptop, smartphone, or thing (as in the
+internet of things). Most computers (including smartphones) connect
+either through Ethernet (named in recognition of the nebulous aether
+world out there) whereby the connection is by wire, or through WiFi
+(as in HiFi but for computers) to connect wirelessly. On connecting to
+the Internet a unique address, called the IP address (Internet
+Protocol), is assigned to the computer.
+END
+```
+<a href="https://en.wikipedia.org/wiki/Internet">The Internet</a>
+(interconnected networks) is the backbone of all communications and
+most services used today. <a
+href="https://en.wikipedia.org/wiki/Home_directory">Home</a>, local
+and international networks provide access to resources beyond the
+local desktop computer, laptop, smartphone, or thing (as in the
+internet of things). Most computers (including smartphones) connect
+either through <a
+href="https://en.wikipedia.org/wiki/Ethernet">Ethernet</a> (named in
+recognition of the nebulous aether world out there) whereby the
+connection is by wire, or through <a
+href="https://en.wikipedia.org/wiki/Wi-Fi">WiFi</a> (as in <a
+href="https://en.wikipedia.org/wiki/High_fidelity">HiFi</a> but for
+computers) to connect wirelessly. On connecting to the Internet a
+unique address, called the <a
+href="https://en.wikipedia.org/wiki/IP_address">IP address</a>
+(Internet <a href="https://en.wikipedia.org/wiki/Communication_protoco
+l">Protocol</a>), is assigned to the computer.
 
 # Demonstration
 
