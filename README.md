@@ -102,7 +102,8 @@ English,en,True,True,True
 $ ml supported aztext id
 ```
 
-Use the `--verbose` to list the headers row
+Use the `--verbose` command line option  to list the header row which
+names the columns:
 
 ```console
 $ ml supported aztext --verbose en
@@ -114,9 +115,9 @@ English,en,True,True,True
 
 The *analyze* command takes a single sentence and returns the text
 analysis of the sentence, beginning with the confidence of the
-identified, the language, the level of positive sentiment, the key
-phrases separated by colons, and the identified entities, separated by
-colons.
+identified language, the language code, the sentiment (0 to 1 as
+negative to positive), the key phrases separated by colons, and the
+identified entities, separated by colons.
 
 ```console
 $ ml analyze aztext "I had a wonderful experience! The rooms were wonderful and staff helpful."
