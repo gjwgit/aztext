@@ -102,11 +102,11 @@ English,en,True,True,True
 $ ml supported aztext id
 ```
 
-Use the `--verbose` command line option  to list the header row which
+Use the `--header` command line option to list the header row which
 names the columns:
 
 ```console
-$ ml supported aztext --verbose en
+$ ml supported aztext --header en
 language,code,sentiment,phrases,entity
 English,en,True,True,True
 ```

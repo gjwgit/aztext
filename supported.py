@@ -38,7 +38,7 @@ option_parser.add_argument(
     help='a language code to check')
 
 option_parser.add_argument(
-    '-b', '--verbose',
+    '--header',
     action='store_true')
 
 args = option_parser.parse_args()
@@ -66,7 +66,7 @@ table = soup.find_all('table')[0]
 rows = table.select('tbody > tr')
 header = [th.text.rstrip() for th in table.find_all('th')]
 
-if args.verbose: print("language,code,sentiment,phrases,entity")
+if args.header: print("language,code,sentiment,phrases,entity")
 for row in rows:
     td = row.find_all("td")
     lang = td[0].text.rstrip()
