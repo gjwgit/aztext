@@ -3,7 +3,7 @@ meta:
   name         : aztext
   title        : Azure Text Analytics cognitive services on the cloud.
   keywords     : azure, text analytics
-  version      : 2.3.0
+  version      : 2.3.1
   languages    : py
   license      : mit
   author       : Graham.Williams@microsoft.com
@@ -14,6 +14,7 @@ dependencies:
   files:
     - https://mlhub.ai/empty.txt: private.txt
     - demo.py
+    - supported.py
     - analyze.py
     - language.py
     - sentiment.py
@@ -24,6 +25,7 @@ dependencies:
     - README.md
 commands:
   demo      : Demonstrate the functionality of text analytics.
+  supported : List features supported for each language.
   analyze   : Prompts for text and analyzes it.
   language  : Determine the language of the text.
   sentiment : Perform a snetiment anlaysis on the text.
