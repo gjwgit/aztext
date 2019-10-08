@@ -6,7 +6,7 @@
 #
 # A command line script to list supported languages.
 #
-# ml sypported aztext
+# ml supported aztext
 # 
 # https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/
 #   quickstarts/python-sdk
