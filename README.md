@@ -1,13 +1,18 @@
 # Azure Text Analytics
 
-This [MLHub](https://mlhub.ai) package provides an introduction to the
-pre-built Text Analytics models provided through Azure's Cognitive
-Services. This service extracts information from text that we supply
-to it. Such information includes the language, key phrases, sentiment
-(0-1 as negative to positive sentiment), and entities.
+This [MLHub](https://mlhub.ai) package provides a quick introduction
+to the pre-built Text Analytics models provided through Azure's
+Cognitive Services. This service extracts information from the text
+supplied to it. Such information includes the language, key phrases,
+sentiment (0-1 as negative to positive sentiment), and entities.
 
 Language identification supports many languages whilst key-phrases,
 sentiment, and entities are limited to a few languages.
+
+In addition to the demonstration this package provides a collection of
+commands that turn the service into useful *command line tools* for
+language identification, sentiment analysis, and phrase/entity
+extraction.
 
 Text analytics is used in many scenarios, including the analysis of
 customer calls into a call centre, the analysis of survey results,
@@ -138,6 +143,14 @@ The *phrase* command extracts the key phrases from the supplied text.
 
 The *sentiment* command determines how positive the text is on a scale
 from 0 (negative) through 0.5 (neutral) to 1 (positive).
+
+```console
+$ ml sentiment aztext The weather here is cold and dreary
+0.17
+
+$ ml sentiment aztext had a great trip and all went really well
+0.97
+```
 
 **Linked Entities Markup**
 
