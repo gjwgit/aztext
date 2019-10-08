@@ -54,10 +54,61 @@ $ ml configure aztext
 
 ## Command Line Tools
 
-This package supports the following command line tools: analyze,
-language, sentiment, phrases, entities. The *analyze* commands
-performs a basic analysis across the four capabilities with the other
-commands dealing with each of the four capabilities.
+This package supports the following command line tools: supported,
+analyze, language, sentiment, phrases, entities. The *supported*
+command lists what functionality is supported for each language. The
+*analyze* commands performs a basic analysis across the four
+capabilities with the other commands dealing with each of the four
+capabilities.
+
+**Supported Languages**
+
+The *supported* command is useful in checking which functionality is
+supported for the supported languages.
+
+```console
+$ ml supported aztext
+Arabic,ar,False,False,True
+Czech,cs,False,False,True
+Chinese-Simplified,zh-hans,True,False,True
+Chinese-Traditional,zh-hant,True,False,False
+Danish,da,True,True,True
+Dutch,nl,True,True,True
+English,en,True,True,True
+Finnish,fi,True,True,True
+French,fr,True,True,True
+German,de,True,True,True
+Greek,el,True,False,False
+Hungarian,hu,False,False,True
+Italian,it,True,True,True
+Japanese,ja,True,True,True
+Korean,ko,False,True,True
+Norwegian  (Bokmål),no,True,True,True
+Polish,pl,True,True,True
+Portuguese (Portugal),pt-PT,True,True,True
+Portuguese (Brazil),pt-BR,False,True,True
+Russian,ru,True,True,True
+Spanish,es,True,True,True
+Swedish,sv,True,True,True
+Turkish,tr,True,False,True
+```
+
+To check if a specific language is supported:
+
+```console
+$ ml supported aztext en
+English,en,True,True,True
+
+$ ml supported aztext id
+```
+
+Use the `--verbose` to list the headers row
+
+```console
+$ ml supported aztext --verbose en
+language,code,sentiment,phrases,entity
+English,en,True,True,True
+```
 
 **Text Analysis**
 
