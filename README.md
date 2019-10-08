@@ -120,11 +120,11 @@ negative to positive), the key phrases separated by colons, and the
 identified entities, separated by colons.
 
 ```console
-$ ml analyze aztext "I had a wonderful experience! The rooms were wonderful and staff helpful."
+$ ml analyze aztext I had a wonderful experience! The rooms were wonderful and staff helpful.
 1.0,en,0.96,wonderful experience:rooms:staff helpful,
 
 $ ml analyze aztext I had a wonderful trip to Singapore and enjoyed seeing the Gardens by the Bay
-1.0,en,0.96,Singapore:Gardens:wonderful trip:Bay,Gardens by the Bay:Singapore
+1.0,en,0.96,Singapore:Gardens:wonderful trip:Bay,Location=Singapore:Location=Gardens by the Bay:Location=Bay
 
 $ ml analyze aztext  这是一个用中文写的文件
 1.0,zh_chs,0.75,,
@@ -133,7 +133,7 @@ $ ml analyze aztext Aku isa mangan beling tanpa lara.
 1.0,id,,,
 
 $ ml analyze aztext Los caminos que llevan hasta Monte Rainier son espectaculares y
-1.0,es,0.55,Monte Rainier:caminos,Monte Rainier
+1.0,es,0.55,Monte Rainier:caminos,Location=Monte Rainier
 
 $ ml analyze aztext La carretera estaba atascada. Había mucho tráfico el día de ayer.
 1.0,es,0.33,carretera:tráfico:día,
@@ -145,8 +145,34 @@ $ ml analyze aztext मैं काँच खा सकता हूँ और 
 Note that sentiments, key phrases, and entities are not
 available for all languages.
 
-Without an argument the command will enter an interactive loop,
-prompting for a sentence, and analyzing that sentence.
+The command will also work without an argument whereby it will either
+ready from standard input if it is part of a pipeline, or else it will
+enter an interactive loop, prompting for a sentence, and analyzing
+that sentence.
+
+```console
+$ cat sample.txt
+They’re annoying the hell out of people.
+Pour le logiciel libre, la liberté a un prix et un modèle économique
+I just toured Ecuador and Peru and came back addicted to plantains.
+
+$ cat sample.txt | ml analyze aztext
+1.0,en,0.06,hell:people,
+1.0,fr,1.00,liberté:prix:logiciel libre:modèle économique,DateTime=a un:Quantity=et un
+1.0,en,0.70,Peru:toured Ecuador:plantains,Location=Ecuador:Location=Peru
+```
+
+```console
+$ ml analyze aztext
+Enter text to be analysed. Quit with Empty or Ctrl-d.
+(Output: conf,lang,sentiment,phrases,entities):
+> La primera vez que escucho semejante palabra
+1.0,es,0.52,semejante palabra,Quantity=primera
+Enter text to be analysed. Quit with Empty or Ctrl-d.
+(Output: conf,lang,sentiment,phrases,entities):
+>  I am pleased to return to this country Australia and to live in Melbourne
+1.0,en,0.87,country Australia:Melbourne,Other=I Am (Killing Heidi song):Location=Australia:Location=Melbourne
+```
 
 **Named Entity Recognition**
 
