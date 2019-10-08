@@ -7,7 +7,7 @@ meta:
   languages    : py
   license      : mit
   author       : Graham.Williams@microsoft.com
-  url          : https://github.com/azure/aztext
+  url          : https://github.com/gjwgit/aztext
 dependencies:
   python3: requests
   pip3: azure-cognitiveservices-language-textanalytics
