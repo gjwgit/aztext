@@ -21,6 +21,8 @@
 import sys
 import os
 import argparse
+import select
+
 
 from mlhub.pkg import azkey
 
@@ -103,24 +105,30 @@ txt = " ".join(args.sentence)
 
 if txt == "":
 
-    prompt = "Enter text to be analysed\nQuit with Ctrl-d, Output conf,lang,sentiment,phrases,entities):\n> "
-
-    try:
-        txt = input(prompt)
-    except EOFError:
-        print()
-        sys.exit(0)
-
-    while txt != '':
-
-        analyseText(txt)
+    if select.select([sys.stdin,],[],[],0.0)[0]:
+        for txt in sys.stdin.readlines():
+            analyseText(txt)
+            print()
+    else:
+        prompt = "Enter text to be analysed. Quit with Empty or Ctrl-d.\n" +\
+                 "(Output: conf,lang,sentiment,phrases,entities):\n> "
 
         try:
-            print()
             txt = input(prompt)
         except EOFError:
             print()
             sys.exit(0)
+
+        while txt != '':
+
+            analyseText(txt)
+
+            try:
+                print()
+                txt = input(prompt)
+            except EOFError:
+                print()
+                sys.exit(0)
 else:
     analyseText(txt)
     print()
