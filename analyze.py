@@ -23,7 +23,6 @@ import os
 import argparse
 import select
 
-
 from mlhub.pkg import azkey
 
 # pip3 install --upgrade --user azure-cognitiveservices-language-textanalytics
@@ -103,32 +102,27 @@ def analyseText(txt):
 
 txt = " ".join(args.sentence)
 
-if txt == "":
-
-    if select.select([sys.stdin,],[],[],0.0)[0]:
-        for txt in sys.stdin.readlines():
-            analyseText(txt)
-            print()
-    else:
-        prompt = "Enter text to be analysed. Quit with Empty or Ctrl-d.\n" +\
-                 "(Output: conf,lang,sentiment,phrases,entities):\n> "
-
-        try:
-            txt = input(prompt)
-        except EOFError:
-            print()
-            sys.exit(0)
-
-        while txt != '':
-
-            analyseText(txt)
-
-            try:
-                print()
-                txt = input(prompt)
-            except EOFError:
-                print()
-                sys.exit(0)
-else:
+if txt != "":
     analyseText(txt)
     print()
+elif select.select([sys.stdin,],[],[],0.0)[0]:
+    for txt in sys.stdin.readlines():
+        analyseText(txt)
+        print()
+else:
+    print("Enter text to be analysed. Quit with Empty or Ctrl-d.\n" +\
+          "(Output: conf,lang,sentiment,phrases,entities)\n")
+    prompt = '> '
+    try:
+        txt = input(prompt)
+    except EOFError:
+        print()
+        sys.exit(0)
+    while txt != '':
+        analyseText(txt)
+        try:
+          print()
+          txt = input(prompt)
+        except EOFError:
+          print()
+          sys.exit(0)
