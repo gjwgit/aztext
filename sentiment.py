@@ -21,7 +21,6 @@
 import sys
 import os
 import argparse
-import select
 
 from mlhub.pkg import azkey
 
@@ -85,7 +84,7 @@ txt = " ".join(args.sentence)
 if txt != "":
     analyseText(txt)
     print()
-elif select.select([sys.stdin,],[],[],0.0)[0]:
+elif not sys.stdin.isatty():
     for txt in sys.stdin.readlines():
         analyseText(txt)
         print()
