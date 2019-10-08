@@ -19,11 +19,11 @@ customer calls into a call centre, the analysis of survey results,
 monitoring social media commentary on a subject, etc.
 
 A free Azure subscription allowing up to 5,000 transactions per month
-is available from https://azure.microsoft.com/free/. Once set up visit
-https://ms.portal.azure.com and Create a resource under AI and Machine
-Learning called Text Analytics. Once created you can access the web
-API subscription key from the portal. This will be prompted for in the
-demo.
+is available from https://azure.microsoft.com/free/. After subscribing
+visit https://ms.portal.azure.com and Create a resource under AI and
+Machine Learning called Text Analytics. Once created you can access
+the web API subscription key from the portal. This will be prompted
+for in the demo.
 
 This package is part of the [Azure on
 MLHub](https://github.com/Azure/mlhub) repository. Please note that
