@@ -89,8 +89,7 @@ elif not sys.stdin.isatty():
         analyseText(txt)
         print()
 else:
-    print("Enter text to be analysed. Quit with Empty or Ctrl-d.\n" +\
-          "(Output: conf,lang,sentiment,phrases,entities)\n")
+    print("Enter text to be analysed. Quit with Empty or Ctrl-d.\n")
     prompt = '> '
     try:
         txt = input(prompt)

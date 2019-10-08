@@ -74,10 +74,16 @@ def analyseText(txt):
 
 txt = " ".join(args.sentence)
 
-if txt == "":
-
-    prompt = "Enter text to be analysed\nQuit with Ctrl-d, Output conf,lang,sentiment,phrases,entities):\n> "
-
+if txt != "":
+    analyseText(txt)
+    print()
+elif not sys.stdin.isatty():
+    for txt in sys.stdin.readlines():
+        analyseText(txt)
+        print()
+else:
+    print("Enter text to be analysed. Quit with Empty or Ctrl-d.\n")
+    prompt = '> '
     try:
         txt = input(prompt)
     except EOFError:
@@ -94,6 +100,3 @@ if txt == "":
         except EOFError:
             print()
             sys.exit(0)
-else:
-    analyseText(txt)
-    print()
