@@ -145,10 +145,8 @@ $ ml analyze aztext मैं काँच खा सकता हूँ और 
 Note that sentiments, key phrases, and entities are not
 available for all languages.
 
-The command will also work without an argument whereby it will either
-ready from standard input if it is part of a pipeline, or else it will
-enter an interactive loop, prompting for a sentence, and analyzing
-that sentence.
+The command will also work without an argument whereby it will read
+text from standard input if it is part of a pipeline.
 
 ```console
 $ cat sample.txt
@@ -162,6 +160,10 @@ $ cat sample.txt | ml analyze aztext
 1.0,en,0.70,Peru:toured Ecuador:plantains,Location=Ecuador:Location=Peru
 ```
 
+If the command is not part of a pipeline the it will enter an
+interactive loop, prompting for a sentence, and analyzing that
+sentence.
+
 ```console
 $ ml analyze aztext
 Enter text to be analysed. Quit with Empty or Ctrl-d.
@@ -172,6 +174,9 @@ Enter text to be analysed. Quit with Empty or Ctrl-d.
 (Output: conf,lang,sentiment,phrases,entities):
 >  I am pleased to return to this country Australia and to live in Melbourne
 1.0,en,0.87,country Australia:Melbourne,Other=I Am (Killing Heidi song):Location=Australia:Location=Melbourne
+Enter text to be analysed. Quit with Empty or Ctrl-d.
+(Output: conf,lang,sentiment,phrases,entities):
+>
 ```
 
 **Named Entity Recognition**
