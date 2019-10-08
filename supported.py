@@ -38,7 +38,7 @@ option_parser.add_argument(
     help='a language code to check')
 
 option_parser.add_argument(
-    '-v', '--verbose',
+    '-b', '--verbose',
     action='store_true')
 
 args = option_parser.parse_args()
