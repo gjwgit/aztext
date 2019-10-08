@@ -160,7 +160,7 @@ $ cat sample.txt | ml analyze aztext
 1.0,en,0.70,Peru:toured Ecuador:plantains,Location=Ecuador:Location=Peru
 ```
 
-If the command is not part of a pipeline the it will enter an
+If the command is not part of a pipeline then it will enter an
 interactive loop, prompting for a sentence, and analyzing that
 sentence.
 
@@ -168,14 +168,11 @@ sentence.
 $ ml analyze aztext
 Enter text to be analysed. Quit with Empty or Ctrl-d.
 (Output: conf,lang,sentiment,phrases,entities):
+
 > La primera vez que escucho semejante palabra
 1.0,es,0.52,semejante palabra,Quantity=primera
-Enter text to be analysed. Quit with Empty or Ctrl-d.
-(Output: conf,lang,sentiment,phrases,entities):
->  I am pleased to return to this country Australia and to live in Melbourne
+> I am pleased to return to this country Australia and to live in Melbourne
 1.0,en,0.87,country Australia:Melbourne,Other=I Am (Killing Heidi song):Location=Australia:Location=Melbourne
-Enter text to be analysed. Quit with Empty or Ctrl-d.
-(Output: conf,lang,sentiment,phrases,entities):
 >
 ```
 
