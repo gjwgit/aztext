@@ -3,7 +3,7 @@ meta:
   name         : aztext
   title        : Azure Text Analytics cognitive services on the cloud.
   keywords     : azure, text analytics
-  version      : 2.2.0
+  version      : 2.3.0
   languages    : py
   license      : mit
   author       : Graham.Williams@microsoft.com
