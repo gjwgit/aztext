@@ -243,7 +243,7 @@ page. This is particularly useful in writing web pages within which
 you want to have links to Wikipedia.
 
 ```console
-$ python3 links.py <<END
+$ ml links aztext <<END
 The Internet (interconnected networks) is the
 backbone of all communications and most services used today. Home,
 local and international networks provide access to resources beyond
