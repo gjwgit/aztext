@@ -6,22 +6,19 @@
 #
 # A command line script to analyze text.
 #
-# ml analyze aztext <sentence>
+# ml analyze aztext [<sentence>]
 # 
 # https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/
 #   quickstarts/python-sdk
 #
 
 # ----------------------------------------------------------------------
-# Setup
-# ----------------------------------------------------------------------
-
 # Import the required libraries.
+# ----------------------------------------------------------------------
 
 import sys
 import os
 import argparse
-import select
 
 from mlhub.pkg import azkey
 
@@ -30,13 +27,8 @@ from mlhub.pkg import azkey
 from azure.cognitiveservices.language.textanalytics import TextAnalyticsClient
 from msrest.authentication import CognitiveServicesCredentials
 
-# Defaults.
-
-SERVICE = "Text Analytics"
-KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
-
 # ----------------------------------------------------------------------
-# Parse command line arguments
+# Parse command line arguments: sentence
 # ----------------------------------------------------------------------
 
 option_parser = argparse.ArgumentParser(add_help=False)
@@ -52,12 +44,15 @@ args = option_parser.parse_args()
 # Request subscription key and endpoint from user.
 # ----------------------------------------------------------------------
 
+SERVICE = "Text Analytics"
+KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
+
 key, endpoint = azkey(KEY_FILE, SERVICE, verbose=False, baseurl=True)
 credentials   = CognitiveServicesCredentials(key)
 client        = TextAnalyticsClient(endpoint=endpoint, credentials=credentials)
 
 # ------------------------------------------------------------------------
-# Helper function
+# Helper function.
 # ------------------------------------------------------------------------
 
 def analyseText(txt):
@@ -97,7 +92,7 @@ def analyseText(txt):
             sep=":"
 
 # ------------------------------------------------------------------------
-# Obtain text and analyze.
+# Analyse sentence obtained from command line, pipe, or interactively.
 # ------------------------------------------------------------------------
 
 txt = " ".join(args.sentence)
@@ -105,7 +100,7 @@ txt = " ".join(args.sentence)
 if txt != "":
     analyseText(txt)
     print()
-elif select.select([sys.stdin,],[],[],0.0)[0]:
+elif sys.stdin.isatty():
     for txt in sys.stdin.readlines():
         analyseText(txt)
         print()
