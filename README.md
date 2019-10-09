@@ -4,7 +4,9 @@ This [MLHub](https://mlhub.ai) package provides a quick introduction
 to the pre-built Text Analytics models provided through Azure's
 Cognitive Services. This service extracts information from the text
 supplied to it. Such information includes the language, key phrases,
-sentiment (0-1 as negative to positive sentiment), and entities.
+sentiment (0-1 as negative to positive sentiment), and entities. This
+package is part of the [Azure on
+MLHub](https://github.com/Azure/mlhub) repository.
 
 Language identification supports many languages whilst key-phrases,
 sentiment, and entities are limited to a few languages.
@@ -25,11 +27,10 @@ Machine Learning called Text Analytics. Once created you can access
 the web API subscription key from the portal. This will be prompted
 for in the demo.
 
-This package is part of the [Azure on
-MLHub](https://github.com/Azure/mlhub) repository. Please note that
-these Azure models, unlike the MLHub models in general, use *closed
-source services* which have no guarantee of ongoing availability and
-do not come with the freedom to modify and share.
+Please note that these Azure models, unlike the MLHub models in
+general, use *closed source services* which have no guarantee of
+ongoing availability and do not come with the freedom to modify and
+share.
 
 Visit the github repository for more details:
 <https://github.com/gjwgit/aztext>
