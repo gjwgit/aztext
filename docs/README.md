@@ -11,8 +11,8 @@ MLHub](https://github.com/Azure/mlhub) repository.
 Language identification supports many languages whilst key-phrases,
 sentiment, and entities are limited to a few languages.
 
-In addition to the demonstration this package provides a collection of
-commands that turn the service into useful *command line tools* for
+In addition to the *demo* command this package provides a collection
+of commands that turn the service into useful *command line tools* for
 language identification, sentiment analysis, and phrase/entity
 extraction.
 
@@ -21,11 +21,12 @@ customer calls into a call centre, the analysis of survey results,
 monitoring social media commentary on a subject, etc.
 
 A free Azure subscription allowing up to 5,000 transactions per month
-is available from https://azure.microsoft.com/free/. After subscribing
-visit https://ms.portal.azure.com and Create a resource under AI and
-Machine Learning called Text Analytics. Once created you can access
-the web API subscription key from the portal. This will be prompted
-for in the demo.
+is available from <https://azure.microsoft.com/free/>. After
+subscribing visit <https://ms.portal.azure.com> and Create a resource
+under AI and Machine Learning called Text Analytics. Once created you
+can access the web API subscription key from the portal. This will be
+prompted for when running a command, and then saved to file to reduce
+the need for repeated authentication requests.
 
 Please note that these Azure models, unlike the MLHub models in
 general, use *closed source services* which have no guarantee of
@@ -35,8 +36,8 @@ share.
 Visit the github repository for more details:
 <https://github.com/gjwgit/aztext>
 
-The Python code is based on the [Azure Text Analytics Quick
-Start](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/python)
+The Python code is based on the [Azure Text Analytics
+Quickstart](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/python)
 
 ## Usage
 
@@ -64,8 +65,10 @@ capabilities.
 
 **Supported Languages**
 
-The *supported* command is useful in checking which functionality is
-supported for the supported languages.
+The *supported* command is used to check the functionality
+supported for the languages that are supported by the model. The
+output is the full language name, the language code, and whether
+sentiment, phrases, and entity are supported.
 
 ```console
 $ ml supported aztext
@@ -116,9 +119,9 @@ English,en,True,True,True
 
 The *analyze* command takes a single sentence and returns the text
 analysis of the sentence, beginning with the confidence of the
-identified language, the language code, the sentiment (0 to 1 as
-negative to positive), the key phrases separated by colons, and the
-identified entities, separated by colons.
+identification of the language, the language code, the sentiment (0 to
+1 as negative to positive), the key phrases identified separated by
+colons, and the identified entities also separated by colons.
 
 ```console
 $ ml analyze aztext I had a wonderful experience! The rooms were wonderful and staff helpful.
@@ -143,11 +146,11 @@ $ ml analyze aztext मैं काँच खा सकता हूँ और 
 1.0,hi,,,
 ```
 
-Note that sentiments, key phrases, and entities are not
-available for all languages.
+Note that sentiments, key phrases, and entities are not supported for
+all languages. Refer to the *supported* command.
 
-The command will also work without an argument whereby it will read
-text from standard input if it is part of a pipeline.
+The *analyze* command will also work without an argument whereby it
+will read text from standard input if it is part of a pipeline.
 
 ```console
 $ cat sample.txt
@@ -161,8 +164,8 @@ $ cat sample.txt | ml analyze aztext
 1.0,en,0.70,Peru:toured Ecuador:plantains,Location=Ecuador:Location=Peru
 ```
 
-If the command is not part of a pipeline then it will enter an
-interactive loop, prompting for a sentence, and analyzing that
+If the *analyze* command is not part of a pipeline then it will enter
+an interactive loop, prompting for a sentence, and analyzing that
 sentence.
 
 ```console
