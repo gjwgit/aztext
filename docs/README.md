@@ -287,6 +287,20 @@ href="https://en.wikipedia.org/wiki/Communication_protocol"
 target="_blank">Protocol</a>), is assigned to the computer.
 </ul>
 
+# Pipeline Use Cases
+
+**Extract Just Positive Utterances From File***
+
+```console
+$ cat sample.txt | 
+  ml sentiment aztext | 
+  awk '$1>0.5{print NR}' | 
+  xargs -I % sed -n %p sample.txt
+
+Pour le logiciel libre, la liberté a un prix et un modèle économique
+I just toured Ecuador and Peru and came back addicted to plantains.
+```
+
 # Demonstration
 
 ```console
