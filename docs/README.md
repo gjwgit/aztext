@@ -289,7 +289,7 @@ target="_blank">Protocol</a>), is assigned to the computer.
 
 # Pipeline Use Cases
 
-**Extract Just Positive Utterances From File***
+**Extract Just Positive Utterances From File**
 
 ```console
 $ cat sample.txt | 
