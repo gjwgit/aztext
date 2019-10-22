@@ -130,17 +130,23 @@ $ ml analyze aztext I had a wonderful experience! The rooms were wonderful and s
 $ ml analyze aztext I had a wonderful trip to Singapore and enjoyed seeing the Gardens by the Bay
 1.0,en,0.96,Singapore:Gardens:wonderful trip:Bay,Location=Singapore:Location=Gardens by the Bay:Location=Bay
 
+$ ml analyze aztext Los caminos que llevan hasta Monte Rainier son espectaculares y
+1.0,es,0.55,Monte Rainier:caminos,Location=Monte Rainier
+
+$ ml analyze aztext La carretera estaba atascada. Había mucho tráfico el día de ayer.
+1.0,es,0.33,carretera:tráfico:día,
+
 $ ml analyze aztext  这是一个用中文写的文件
 1.0,zh_chs,0.75,,
 
 $ ml analyze aztext Aku isa mangan beling tanpa lara.
 1.0,id,,,
 
-$ ml analyze aztext Los caminos que llevan hasta Monte Rainier son espectaculares y
-1.0,es,0.55,Monte Rainier:caminos,Location=Monte Rainier
+$ ml analyze aztext Các bãi biển trên Phú Quốc là tuyệt vời.
+1.0,vi,,,
 
-$ ml analyze aztext La carretera estaba atascada. Había mucho tráfico el día de ayer.
-1.0,es,0.33,carretera:tráfico:día,
+$ ml analyze aztext คราวนี้มีนักท่องเที่ยวจำนวนมากเกินไปที่ภูเก็ตและเราต้องต่อสู้เพื่อวางบนพื้นทราย
+1.0,th,,,
 
 $ ml analyze aztext मैं काँच खा सकता हूँ और मुझे उससे कोई चोट नहीं पहुंचती.
 1.0,hi,,,
