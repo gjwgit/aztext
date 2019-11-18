@@ -1,20 +1,17 @@
 # Azure Text Analytics
 
-This [MLHub](https://mlhub.ai) package provides a quick introduction
-to the pre-built Text Analytics models provided through Azure's
-Cognitive Services. This service extracts information from the text
-supplied to it. Such information includes the language, key phrases,
-sentiment (0-1 as negative to positive sentiment), and entities. This
+This [MLHub](https://mlhub.ai) package provides command line tools
+that utilise pre-built model from [Azure Text
+Analytics](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics)
+Individual command line tools are packaged for common text analytics
+tasks including language identification, sentiment analysis, and
+phrase/entity extraction. The package also provides an interactive
+demonstration as an overview of the capabilities of the service. This
 package is part of the [Azure on
 MLHub](https://github.com/Azure/mlhub) repository.
 
 Language identification supports many languages whilst key-phrases,
 sentiment, and entities are limited to a few languages.
-
-In addition to the *demo* command this package provides a collection
-of commands that turn the service into useful *command line tools* for
-language identification, sentiment analysis, and phrase/entity
-extraction.
 
 Text analytics is used in many scenarios, including the analysis of
 customer calls into a call centre, the analysis of survey results,
