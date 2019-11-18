@@ -1,8 +1,8 @@
 # Azure Text Analytics
 
 This [MLHub](https://mlhub.ai) package provides command line tools
-that utilise pre-built model from [Azure Text
-Analytics](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics)
+that utilise pre-built models from [Azure Text
+Analytics](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics).
 Individual command line tools are packaged for common text analytics
 tasks including language identification, sentiment analysis, and
 phrase/entity extraction. The package also provides an interactive
