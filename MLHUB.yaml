@@ -22,7 +22,7 @@ dependencies:
     - entities.py
     - links.py
     - canned.pkl
-    - README.md
+    - docs/README.md
 commands:
   demo      : Demonstrate the functionality of text analytics.
   supported : List features supported for each language.
