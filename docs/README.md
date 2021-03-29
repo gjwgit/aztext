@@ -36,6 +36,15 @@ Visit the github repository for more details:
 The Python code is based on the [Azure Text Analytics
 Quickstart](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/python)
 
+## Quick Start
+
+```console
+$ ml demo aztext
+$ ml supported aztext
+$ ml analyze aztext Winter has set in and the days are short and cold.
+$ ml analyze aztext  这是一个用中文写的文件
+```
+
 ## Usage
 
 - To install mlhub (Ubuntu 18.04 LTS)
