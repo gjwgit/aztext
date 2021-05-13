@@ -10,7 +10,8 @@
 #   quickstarts/python
 #   quickstarts/python-sdk
 
-from mlhub.pkg import azkey, mlask, mlcat
+from mlhub.pkg import mlask, mlcat
+from mlhub.utils import get_private
 
 mlcat("Azure Text Analytics", """\
 Welcome to a demo of the pre-built models for Text Analytics provided
@@ -40,10 +41,19 @@ from msrest.authentication import CognitiveServicesCredentials
 # Request subscription key and endpoint from user.
 # ----------------------------------------------------------------------
 
-SERVICE = "Text Analytics"
-KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
+PRIVATE_FILE = "private.json"
 
-key, endpoint = azkey(KEY_FILE, SERVICE, verbose=False, baseurl=True)
+path = os.path.join(os.getcwd(), PRIVATE_FILE)
+
+private_dic = get_private(path, "aztext")
+
+if "key" not in private_dic["Text Analytics"]:
+    print("There is no key in private.json. Please run ml configure aztext to upload your key.", file=sys.stderr)
+    sys.exit(1)
+
+key = private_dic["Text Analytics"]["key"]
+
+endpoint = private_dic["Text Analytics"]["endpoint"]
 
 mlask(end="\n")
 
