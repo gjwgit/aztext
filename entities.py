@@ -22,17 +22,13 @@ import sys
 import os
 import argparse
 
-from mlhub.pkg import azkey
+from mlhub.utils import get_private
 
 # pip3 install --upgrade --user azure-cognitiveservices-language-textanalytics
 
 from azure.cognitiveservices.language.textanalytics import TextAnalyticsClient
 from msrest.authentication import CognitiveServicesCredentials
 
-# Defaults.
-
-SERVICE = "Text Analytics"
-KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
 
 # ----------------------------------------------------------------------
 # Parse command line arguments
@@ -50,25 +46,38 @@ args = option_parser.parse_args()
 # ----------------------------------------------------------------------
 # Request subscription key and endpoint from user.
 # ----------------------------------------------------------------------
+PRIVATE_FILE = "private.json"
 
-key, endpoint = azkey(KEY_FILE, SERVICE, verbose=False, baseurl=True)
-credentials   = CognitiveServicesCredentials(key)
-client        = TextAnalyticsClient(endpoint=endpoint, credentials=credentials)
+path = os.path.join(os.getcwd(), PRIVATE_FILE)
+
+private_dic = get_private(path, "aztext")
+
+if "key" not in private_dic["Text Analytics"]:
+    print("There is no key in private.json. Please run ml configure aztext to upload your key.", file=sys.stderr)
+    sys.exit(1)
+
+key = private_dic["Text Analytics"]["key"]
+
+endpoint = private_dic["Text Analytics"]["endpoint"]
+
+credentials = CognitiveServicesCredentials(key)
+client = TextAnalyticsClient(endpoint=endpoint, credentials=credentials)
+
 
 # ------------------------------------------------------------------------
 # Helper function
 # ------------------------------------------------------------------------
 
 def analyseText(txt):
-    documents = [{ 'id': '1', 'text': txt }]
-    response  = client.detect_language(documents=documents)
+    documents = [{'id': '1', 'text': txt}]
+    response = client.detect_language(documents=documents)
 
-    l    = response.documents[0]
-    dl   = l.detected_languages[0]
+    l = response.documents[0]
+    dl = l.detected_languages[0]
     lang = dl.iso6391_name
 
-    documents = [{ 'id': '1', 'language': lang, 'text': txt }]
-    response  = client.entities(documents=documents)
+    documents = [{'id': '1', 'language': lang, 'text': txt}]
+    response = client.entities(documents=documents)
     for es in response.documents:
         for e in es.entities:
             m = e.matches[0]
@@ -78,12 +87,16 @@ def analyseText(txt):
                 print(",", end="")
             else:
                 print(f"{e.sub_type},", end="")
-            print(f"{m.entity_type_score:0.2f},", end="")
+            if m.entity_type_score != None:
+                print(f"{m.entity_type_score:0.2f},", end="")
+            else:
+                print("0.00,", end="")
             print(f"{m.offset},{m.length},", end="")
             if m.wikipedia_score == None:
                 print(",,,")
             else:
                 print(f"{m.wikipedia_score:0.2f},{e.wikipedia_language},{e.wikipedia_id},{e.wikipedia_url}")
+
 
 # ------------------------------------------------------------------------
 # Obtain text and analyze.

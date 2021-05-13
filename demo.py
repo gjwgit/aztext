@@ -189,5 +189,3 @@ for d, r in zip(documents, response.documents):
     for e in r.entities:
         print(f"  {e.name}: {e.type}.")
     print("")
-
-mlask(end="\n")
