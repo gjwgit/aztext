@@ -53,10 +53,6 @@ path = os.path.join(os.getcwd(), PRIVATE_FILE)
 
 private_dic = get_private(path, "aztext")
 
-if "key" not in private_dic["Text Analytics"]:
-    print("There is no key in private.json. Please run ml configure aztext to upload your key.", file=sys.stderr)
-    sys.exit(1)
-
 key = private_dic["Text Analytics"]["key"]
 
 endpoint = private_dic["Text Analytics"]["endpoint"]
