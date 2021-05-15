@@ -6,13 +6,14 @@ meta:
   version      : 2.4.7
   languages    : py
   license      : mit
+  private:
+    Text Analytics: key*, endpoint
   author       : Graham.Williams@microsoft.com
   url          : https://github.com/gjwgit/aztext
 dependencies:
   python3: requests
   pip3: azure-cognitiveservices-language-textanalytics
   files:
-    - https://mlhub.ai/empty.txt: private.txt
     - demo.py
     - supported.py
     - analyze.py
@@ -22,7 +23,7 @@ dependencies:
     - entities.py
     - links.py
     - canned.pkl
-    - docs/README.md
+    - README.md
 commands:
   demo      : Demonstrate the functionality of text analytics.
   supported : List features supported for each language.

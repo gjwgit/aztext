@@ -20,7 +20,7 @@ import sys
 import os
 import argparse
 
-from mlhub.pkg import azkey
+from mlhub.utils import get_private
 
 # pip3 install --upgrade --user azure-cognitiveservices-language-textanalytics
 
@@ -43,35 +43,41 @@ args = option_parser.parse_args()
 # ----------------------------------------------------------------------
 # Request subscription key and endpoint from user.
 # ----------------------------------------------------------------------
+PRIVATE_FILE = "private.json"
 
-SERVICE = "Text Analytics"
-KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
+path = os.path.join(os.getcwd(), PRIVATE_FILE)
 
-key, endpoint = azkey(KEY_FILE, SERVICE, verbose=False, baseurl=True)
-credentials   = CognitiveServicesCredentials(key)
-client        = TextAnalyticsClient(endpoint=endpoint, credentials=credentials)
+private_dic = get_private(path, "aztext")
+
+key = private_dic["Text Analytics"]["key"]
+
+endpoint = private_dic["Text Analytics"]["endpoint"]
+
+credentials = CognitiveServicesCredentials(key)
+client = TextAnalyticsClient(endpoint=endpoint, credentials=credentials)
+
 
 # ------------------------------------------------------------------------
 # Helper function.
 # ------------------------------------------------------------------------
 
 def analyseText(txt):
-    documents = [{ 'id': '1', 'text': txt }]
-    response  = client.detect_language(documents=documents)
+    documents = [{'id': '1', 'text': txt}]
+    response = client.detect_language(documents=documents)
 
-    l    = response.documents[0]
-    dl   = l.detected_languages[0]
+    l = response.documents[0]
+    dl = l.detected_languages[0]
     lang = dl.iso6391_name
 
     print(f"{dl.score},{lang},", end="")
 
-    documents = [{ 'id': '1', 'language': lang, 'text': txt }]
-    response  = client.sentiment(documents=documents)
+    documents = [{'id': '1', 'language': lang, 'text': txt}]
+    response = client.sentiment(documents=documents)
 
     sep = ""
     for s in response.documents:
         print(f"{sep}{s.score:0.2f}", end="")
-        sep=":"
+        sep = ":"
     print(",", end="")
 
     response = client.key_phrases(documents=documents)
@@ -82,14 +88,15 @@ def analyseText(txt):
             print(f"{sep}{p}", end="")
             sep = ":"
     print(",", end="")
-    
+
     response = client.entities(documents=documents)
 
     for es in response.documents:
         sep = ""
         for e in es.entities:
-            print(f"{sep}{e.type}={e.name}", end="") # e['wikipediaUrl']
-            sep=":"
+            print(f"{sep}{e.type}={e.name}", end="")  # e['wikipediaUrl']
+            sep = ":"
+
 
 # ------------------------------------------------------------------------
 # Analyse sentence obtained from command line, pipe, or interactively.
@@ -105,7 +112,7 @@ elif sys.stdin.isatty():
         analyseText(txt)
         print()
 else:
-    print("Enter text to be analysed. Quit with Empty or Ctrl-d.\n" +\
+    print("Enter text to be analysed. Quit with Empty or Ctrl-d.\n" + \
           "(Output: conf,lang,sentiment,phrases,entities)\n")
     prompt = '> '
     try:
@@ -116,8 +123,8 @@ else:
     while txt != '':
         analyseText(txt)
         try:
-          print()
-          txt = input(prompt)
+            print()
+            txt = input(prompt)
         except EOFError:
-          print()
-          sys.exit(0)
+            print()
+            sys.exit(0)

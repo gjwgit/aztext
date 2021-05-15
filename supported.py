@@ -16,14 +16,11 @@
 # Import the required libraries.
 # ----------------------------------------------------------------------
 
-import sys
-import os
 import argparse
 
 import requests
 
 from bs4 import BeautifulSoup
-from mlhub.pkg import azkey, mlcat
 
 # ----------------------------------------------------------------------
 # Parse command line arguments: language header

@@ -22,17 +22,13 @@ import sys
 import os
 import argparse
 
-from mlhub.pkg import azkey
+from mlhub.utils import get_private
 
 # pip3 install --upgrade --user azure-cognitiveservices-language-textanalytics
 
 from azure.cognitiveservices.language.textanalytics import TextAnalyticsClient
 from msrest.authentication import CognitiveServicesCredentials
 
-# Defaults.
-
-SERVICE = "Text Analytics"
-KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
 
 # ----------------------------------------------------------------------
 # Parse command line arguments
@@ -51,7 +47,16 @@ args = option_parser.parse_args()
 # Request subscription key and endpoint from user.
 # ----------------------------------------------------------------------
 
-key, endpoint = azkey(KEY_FILE, SERVICE, verbose=False, baseurl=True)
+PRIVATE_FILE = "private.json"
+
+path = os.path.join(os.getcwd(), PRIVATE_FILE)
+
+private_dic = get_private(path, "aztext")
+
+key = private_dic["Text Analytics"]["key"]
+
+endpoint = private_dic["Text Analytics"]["endpoint"]
+
 credentials   = CognitiveServicesCredentials(key)
 client        = TextAnalyticsClient(endpoint=endpoint, credentials=credentials)
 
