@@ -90,7 +90,6 @@ txt = " ".join(args.sentence)
 
 if txt != "":
     analyseText(txt)
-    print()
 elif not sys.stdin.isatty():
     for txt in sys.stdin.readlines():
         analyseText(txt)

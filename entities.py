@@ -19,6 +19,7 @@
 # Import the required libraries.
 
 import sys
+
 import argparse
 
 from utils import request_priv_info
@@ -93,7 +94,6 @@ txt = " ".join(args.sentence)
 
 if txt != "":
     analyseText(txt)
-    print()
 elif not sys.stdin.isatty():
     for txt in sys.stdin.readlines():
         analyseText(txt)
