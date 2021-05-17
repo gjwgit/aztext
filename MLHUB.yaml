@@ -24,6 +24,7 @@ dependencies:
     - links.py
     - canned.pkl
     - README.md
+    - utils.py
 commands:
   demo      : Demonstrate the functionality of text analytics.
   supported : List features supported for each language.

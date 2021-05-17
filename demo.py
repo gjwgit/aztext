@@ -11,7 +11,7 @@
 #   quickstarts/python-sdk
 
 from mlhub.pkg import mlask, mlcat
-from mlhub.utils import get_private
+from utils import request_priv_info
 
 mlcat("Azure Text Analytics", """\
 Welcome to a demo of the pre-built models for Text Analytics provided
@@ -27,9 +27,6 @@ entities.
 
 # Import the required libraries.
 
-import sys
-import os
-
 from textwrap import fill
 
 # pip3 install --upgrade --user azure-cognitiveservices-language-textanalytics
@@ -41,15 +38,7 @@ from msrest.authentication import CognitiveServicesCredentials
 # Request subscription key and endpoint from user.
 # ----------------------------------------------------------------------
 
-PRIVATE_FILE = "private.json"
-
-path = os.path.join(os.getcwd(), PRIVATE_FILE)
-
-private_dic = get_private(path, "aztext")
-
-key = private_dic["Text Analytics"]["key"]
-
-endpoint = private_dic["Text Analytics"]["endpoint"]
+key, endpoint = request_priv_info()
 
 mlask(end="\n")
 
