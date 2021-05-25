@@ -18,8 +18,7 @@
 
 import sys
 import argparse
-
-from utils import request_priv_info
+from mlhub.pkg import get_private
 
 # pip3 install --upgrade --user azure-cognitiveservices-language-textanalytics
 
@@ -42,7 +41,7 @@ args = option_parser.parse_args()
 # ----------------------------------------------------------------------
 # Request subscription key and endpoint from user.
 # ----------------------------------------------------------------------
-key, endpoint = request_priv_info()
+key, endpoint = get_private()
 
 credentials = CognitiveServicesCredentials(key)
 client = TextAnalyticsClient(endpoint=endpoint, credentials=credentials)

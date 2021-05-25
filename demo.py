@@ -10,8 +10,7 @@
 #   quickstarts/python
 #   quickstarts/python-sdk
 
-from mlhub.pkg import mlask, mlcat
-from utils import request_priv_info
+from mlhub.pkg import mlask, mlcat, get_private
 
 mlcat("Azure Text Analytics", """\
 Welcome to a demo of the pre-built models for Text Analytics provided
@@ -38,7 +37,7 @@ from msrest.authentication import CognitiveServicesCredentials
 # Request subscription key and endpoint from user.
 # ----------------------------------------------------------------------
 
-key, endpoint = request_priv_info()
+key, endpoint = get_private()
 
 mlask(end="\n")
 
