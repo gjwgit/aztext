@@ -3,7 +3,7 @@ meta:
   name         : aztext
   title        : Azure Text Analytics cognitive services on the cloud.
   keywords     : azure, text analytics, sentiment analysis, entity, phrases, natural language understanding, dnn
-  version      : 2.5.1
+  version      : 2.5.2
   languages    : py
   license      : mit
   private:
