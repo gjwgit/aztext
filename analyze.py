@@ -88,6 +88,7 @@ def analyseText(txt):
             print(f"{sep}{e.type}={e.name}", end="")  # e['wikipediaUrl']
             sep = ":"
 
+    print("")
 
 # ------------------------------------------------------------------------
 # Analyse sentence obtained from command line, pipe, or interactively.
