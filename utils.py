@@ -11,9 +11,6 @@ def request_priv_info():
 
     path = os.path.join(os.getcwd(), PRIVATE_FILE)
 
-    private_dic = get_private(path, "aztext")
+    key, endpoint = get_private(path, "Text Analytics")
 
-    subscription_key = private_dic["Text Analytics"]["key"]
-
-    endpoint = private_dic["Text Analytics"]["endpoint"]
-    return subscription_key, endpoint
+    return key, endpoint
