@@ -60,6 +60,11 @@ $ ml install   aztext
 $ ml configure aztext
 ```
 
+## Documentation
+
+Visit the [Desktop Survival
+Guide](https://survivor.togaware.com/mlhub/) for details.
+
 ## Command Line Tools
 
 This package supports the following command line tools: supported,
