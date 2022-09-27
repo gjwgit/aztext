@@ -67,7 +67,8 @@ def analyseText(txt):
 
     sep = ""
     for s in response.documents:
-        print(f"{sep}{s.score:0.2f}", end="")
+        z = (s.score-0.5)/0.5
+        print(f"{z:0.2f}", end="")
         sep=":"
 
 # ------------------------------------------------------------------------
@@ -78,6 +79,7 @@ txt = " ".join(args.sentence)
 
 if txt != "":
     analyseText(txt)
+    print()
 elif not sys.stdin.isatty():
     for txt in sys.stdin.readlines():
         analyseText(txt)
