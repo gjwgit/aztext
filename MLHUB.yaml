@@ -30,7 +30,7 @@ commands:
   supported : List features supported for each language.
   analyze   : Prompts for text and analyzes it.
   language  : Determine the language of the text.
-  sentiment : Perform a snetiment anlaysis on the text.
+  sentiment : Perform a sentiment anlaysis on the text.
   phrases   : Identify the key phrases.
   entities  : Identify the entities mentioned in the text.
   links     : Add Wikipedia links to the text.
